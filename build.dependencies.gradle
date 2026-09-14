@@ -5,6 +5,8 @@ repositories {
 }
 
 dependencies {
+    implementation 'com.pedropathing.ivy:core:1.1.0'
+    implementation 'com.pedropathing.ivy:pedro:1.1.0'
     implementation 'org.firstinspires.ftc:Inspection:11.2.1'
     implementation 'org.firstinspires.ftc:Blocks:11.2.1'
     //noinspection Aligned16KB
