@@ -17,24 +17,34 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.pedro.Constants;
 
-@Autonomous(name = "BioBlueAuto", group = "Autonomous")
-public class BioBuzzBlueAuto extends LinearOpMode {
+@Autonomous(name = "Eight", group = "Autonomous")
+public class FigureEight extends LinearOpMode {
 
     private Follower follower;
 
     private final PoseFactory poseFactory = PoseFactory.degrees();
 
-    private final Pose point11Start = poseFactory.of(132, 32, 180);
-    private final Pose point11 = poseFactory.of(20, 27.5, 270);
-    private final Pose point22 = poseFactory.of(20, 15, 270);
-    private final Pose point33 = poseFactory.of(58.5, 113, 312);
-    private final Pose point33Control1 = poseFactory.of(109, 20.5, 0);
+    private final Pose start = poseFactory.of(72, 72, 90);
+    private final Pose path1 = poseFactory.of(72, 72, 0);
+    private final Pose point2 = poseFactory.of(72, 72, 36.3844);
+    private final Pose point2Control1 = poseFactory.of(36, 108, 0);
+    private final Pose point2Control2 = poseFactory.of(24, 36, 0);
+    private final Pose point3 = poseFactory.of(72, 72, 143.6156);
+    private final Pose point3Control1 = poseFactory.of(108, 108, 0);
+    private final Pose point3Control2 = poseFactory.of(120, 36, 0);
 
+    // Autonomous routine
     public Command autoRoutine() {
         return sequential(
-                follow(follower, path11()),
-                follow(follower, path22()),
-                follow(follower, path33())
+                follow(follower, path1()),
+                follow(follower, path2()),
+                follow(follower, path3()),
+                follow(follower, path1()),
+                follow(follower, path2()),
+                follow(follower, path3()),
+                follow(follower, path1()),
+                follow(follower, path2()),
+                follow(follower, path3())
         );
     }
 
@@ -65,15 +75,15 @@ public class BioBuzzBlueAuto extends LinearOpMode {
         }
     }
 
-    public Path path11() {
-        return line(point11Start, point11).linear(point11Start, point11);
+    public Path path1() {
+        return line(start, path1).tangent();
     }
 
-    public Path path22() {
-        return line(point11, point22).linear(point11, point22);
+    public Path path2() {
+        return curve(path1, point2Control1, point2Control2, point2).tangent();
     }
 
-    public Path path33() {
-        return curve(point22, point33Control1, point33).linear(point22, point33);
+    public Path path3() {
+        return curve(point2, point3Control1, point3Control2, point3).tangent();
     }
 }
