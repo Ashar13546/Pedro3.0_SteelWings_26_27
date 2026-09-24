@@ -21,7 +21,7 @@ public class BioBuzzTeleOpTest extends OpMode {
         follower.manual(
                 -gamepad1.left_stick_y,
                 -gamepad1.left_stick_x,
-                gamepad1.right_stick_x
+                -gamepad1.right_stick_x
         );
 
         follower.update();
