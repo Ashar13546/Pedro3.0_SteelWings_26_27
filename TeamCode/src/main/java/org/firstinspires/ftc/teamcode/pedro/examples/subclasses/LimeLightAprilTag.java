@@ -50,6 +50,7 @@ public class LimeLightAprilTag {
         LLResult result = limelight.getLatestResult();
 
         if (result == null || !result.isValid()) {
+
             return;
         }
 

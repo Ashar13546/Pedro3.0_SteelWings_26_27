@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.pedro.examples;
+package org.firstinspires.ftc.teamcode.pedro.examples.other;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -15,7 +15,7 @@ public class test extends LinearOpMode {
 
     private static double SHOOTER_VELOCITY = 1620;
 
-    private static final double P = 90.0;
+    private static final double P = 80.0;
     private static final double I = 0.0;
     private static final double D = 8.0;
     private static final double F = 13.5;
@@ -36,11 +36,19 @@ public class test extends LinearOpMode {
 
         while (opModeIsActive()) {
 
-            if (gamepad1.y) {
+            if (gamepad1.dpad_right) {
                 SHOOTER_VELOCITY += 10;
+
+                while (gamepad1.dpad_right && opModeIsActive()) {
+                    idle();
+                }
             }
-            if (gamepad1.x) {
+            if (gamepad1.dpad_left) {
                 SHOOTER_VELOCITY -= 10;
+
+                while (gamepad1.dpad_left && opModeIsActive()) {
+                    idle();
+                }
             }
 
             if (gamepad1.a) {

@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.pedro.examples;
+package org.firstinspires.ftc.teamcode.pedro.examples.autonomous;
 
 import static com.pedropathing.api.Paths.*;
 
@@ -9,7 +9,6 @@ import com.pedropathing.paths.Path;
 import com.pedropathing.ivy.Command;
 import com.pedropathing.ivy.Scheduler;
 import static com.pedropathing.ivy.Scheduler.schedule;
-import static com.pedropathing.ivy.commands.Commands.*;
 import static com.pedropathing.ivy.groups.Groups.sequential;
 import static com.pedropathing.ivy.pedro.PedroCommands.follow;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
@@ -17,30 +16,24 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.pedro.Constants;
 
-@Autonomous(name = "BlueAutoY118", group = "Autonomous")
-public class BlueAutoY118 extends LinearOpMode {
+@Autonomous(name = "BioBlueAuto", group = "Autonomous")
+public class BioBuzzBlueAuto extends LinearOpMode {
 
     private Follower follower;
 
     private final PoseFactory poseFactory = PoseFactory.degrees();
 
-    private final Pose start = poseFactory.of(132, 118, 180);
-    private final Pose path1Start = poseFactory.of(132, 118, 180);
-    private final Pose path1 = poseFactory.of(58.5, 113, 312);
-    private final Pose point2 = poseFactory.of(130, 116.5, 90);
-    private final Pose point3 = poseFactory.of(130, 130, 90);
-    private final Pose point4 = poseFactory.of(58.5, 113, 312);
-    private final Pose point5 = poseFactory.of(130, 32, 180);
-    private final Pose point5Control1 = poseFactory.of(127, 129, 0);
+    private final Pose point11Start = poseFactory.of(132, 32, 180);
+    private final Pose point11 = poseFactory.of(20, 27.5, 270);
+    private final Pose point22 = poseFactory.of(20, 15, 270);
+    private final Pose point33 = poseFactory.of(58.5, 113, 312);
+    private final Pose point33Control1 = poseFactory.of(109, 20.5, 0);
 
-    // Autonomous routine
     public Command autoRoutine() {
         return sequential(
-                follow(follower, path1()),
-                follow(follower, path2()),
-                follow(follower, path3()),
-                follow(follower, path4()),
-                follow(follower, path5())
+                follow(follower, path11()),
+                follow(follower, path22()),
+                follow(follower, path33())
         );
     }
 
@@ -48,7 +41,7 @@ public class BlueAutoY118 extends LinearOpMode {
     public void runOpMode() {
         Scheduler.reset();
         follower = Constants.create(hardwareMap);
-        follower.setPose(start);
+        follower.setPose(point11Start);
         follower.update();
 
         waitForStart();
@@ -71,23 +64,15 @@ public class BlueAutoY118 extends LinearOpMode {
         }
     }
 
-    public Path path1() {
-        return line(path1Start, path1).linear(path1Start, path1);
+    public Path path11() {
+        return line(point11Start, point11).linear(point11Start, point11);
     }
 
-    public Path path2() {
-        return line(path1, point2).linear(path1, point2);
+    public Path path22() {
+        return line(point11, point22).linear(point11, point22);
     }
 
-    public Path path3() {
-        return line(point2, point3).linear(point2, point3);
-    }
-
-    public Path path4() {
-        return line(point3, point4).linear(point3, point4);
-    }
-
-    public Path path5() {
-        return curve(point4, point5Control1, point5).linear(point4, point5);
+    public Path path33() {
+        return curve(point22, point33Control1, point33).linear(point22, point33);
     }
 }

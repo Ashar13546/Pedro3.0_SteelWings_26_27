@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.pedro.examples;
+package org.firstinspires.ftc.teamcode.pedro.examples.autonomous;
 
 import static com.pedropathing.api.Paths.*;
 
@@ -9,38 +9,35 @@ import com.pedropathing.paths.Path;
 import com.pedropathing.ivy.Command;
 import com.pedropathing.ivy.Scheduler;
 import static com.pedropathing.ivy.Scheduler.schedule;
-import static com.pedropathing.ivy.commands.Commands.*;
 import static com.pedropathing.ivy.groups.Groups.sequential;
 import static com.pedropathing.ivy.pedro.PedroCommands.follow;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorEx;
-import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.teamcode.pedro.Constants;
-import org.firstinspires.ftc.teamcode.pedro.examples.subclasses.IntakeSubclass;
-import org.firstinspires.ftc.teamcode.pedro.examples.subclasses.ShooterSubclass;
 
-@Autonomous(name = "BlueTest", group = "Autonomous")
-public class BlueTest extends LinearOpMode {
+@Autonomous(name = "BioRedAuto", group = "Autonomous")
+public class BioBuzzRedAuto extends LinearOpMode {
 
-    private IntakeSubclass intake = new IntakeSubclass();
-
-    private ShooterSubclass shooter = new ShooterSubclass();
     private Follower follower;
 
     private final PoseFactory poseFactory = PoseFactory.degrees();
 
-    private final Pose start = poseFactory.of(132, 32, 90);
-    private final Pose point11Start = poseFactory.of(132, 32, 180);
-    private final Pose point11 = poseFactory.of(20, 27.5, 270);
-    private final Pose point22 = poseFactory.of(20, 15, 270);
-    private final Pose point33 = poseFactory.of(58.5, 113, 312);
-    private final Pose point33Control1 = poseFactory.of(109, 20.5, 0);
+    private final Pose start = poseFactory.of(12, 112, 0);
+    private final Pose point11Start = poseFactory.of(12, 112, 0);
+    private final Pose point11 = poseFactory.of(124, 112, 90);
+    private final Pose point22 = poseFactory.of(124, 129, 90);
+    private final Pose point33 = poseFactory.of(85.5, 31, 132);
+    private final Pose point33Control1 = poseFactory.of(35, 123.5, 0);
 
     // Autonomous routine
-
+    public Command autoRoutine() {
+        return sequential(
+                follow(follower, path11()),
+                follow(follower, path22()),
+                follow(follower, path33())
+        );
+    }
 
     @Override
     public void runOpMode() {
@@ -48,8 +45,6 @@ public class BlueTest extends LinearOpMode {
         follower = Constants.create(hardwareMap);
         follower.setPose(start);
         follower.update();
-        intake.init(hardwareMap);
-        shooter.init(hardwareMap);
 
         waitForStart();
         schedule(autoRoutine());
@@ -69,17 +64,6 @@ public class BlueTest extends LinearOpMode {
 
             telemetry.update();
         }
-    }
-
-    public Command autoRoutine() {
-        return sequential(
-                follow(follower, path11()),
-                instant(() -> intake.intakeOn()),
-                follow(follower, path22()),
-                instant(() -> intake.intakeOff()),
-                follow(follower, path33()),
-                instant(() -> shooter.shooterOn())
-        );
     }
 
     public Path path11() {

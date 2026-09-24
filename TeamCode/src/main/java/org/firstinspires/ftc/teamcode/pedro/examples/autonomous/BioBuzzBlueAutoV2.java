@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.pedro.examples;
+package org.firstinspires.ftc.teamcode.pedro.examples.autonomous;
 
 import static com.pedropathing.api.Paths.*;
 
@@ -16,22 +16,22 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.pedro.Constants;
 
-@Autonomous(name = "RedAutoV2", group = "Autonomous")
-public class BioBuzzRedAutoV2 extends LinearOpMode {
+@Autonomous(name = "BlueAutoV2", group = "Autonomous")
+public class BioBuzzBlueAutoV2 extends LinearOpMode {
 
     private Follower follower;
 
     private final PoseFactory poseFactory = PoseFactory.degrees();
 
-    private final Pose start = poseFactory.of(12, 72, 0);
-    private final Pose point11Start = poseFactory.of(12, 72, 0);
-    private final Pose point11 = poseFactory.of(124, 116.5, 90);
-    private final Pose point11Control1 = poseFactory.of(24, 124, 0);
-    private final Pose point22 = poseFactory.of(124, 129, 90);
-    private final Pose point33 = poseFactory.of(85.5, 31, 132);
-    private final Pose point33Control1 = poseFactory.of(35, 123.5, 0);
-    private final Pose point4 = poseFactory.of(12, 112, 0);
-    private final Pose point4Control1 = poseFactory.of(9.5, 17, 0);
+    private final Pose start = poseFactory.of(132, 72, 180);
+    private final Pose point11Start = poseFactory.of(132, 72, 180);
+    private final Pose point11 = poseFactory.of(20, 27.5, 270);
+    private final Pose point11Control1 = poseFactory.of(117.4862, 8.4516, 0);
+    private final Pose point22 = poseFactory.of(20, 15, 270);
+    private final Pose point33 = poseFactory.of(58.5, 113, 312);
+    private final Pose point33Control1 = poseFactory.of(108.9884, 20.5, 0);
+    private final Pose point4 = poseFactory.of(130, 32, 180);
+    private final Pose point4Control1 = poseFactory.of(124, 125, 0);
 
     // Autonomous routine
     public Command autoRoutine() {

@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.pedro.examples;
+package org.firstinspires.ftc.teamcode.pedro.examples.tests;
 
 import static com.pedropathing.api.Paths.*;
 
@@ -9,7 +9,6 @@ import com.pedropathing.paths.Path;
 import com.pedropathing.ivy.Command;
 import com.pedropathing.ivy.Scheduler;
 import static com.pedropathing.ivy.Scheduler.schedule;
-import static com.pedropathing.ivy.commands.Commands.*;
 import static com.pedropathing.ivy.groups.Groups.sequential;
 import static com.pedropathing.ivy.pedro.PedroCommands.follow;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
@@ -17,26 +16,21 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.pedro.Constants;
 
-@Autonomous(name = "EightLarge", group = "Autonomous")
-public class FigureEightLarge extends LinearOpMode {
+@Autonomous(name = "Eight", group = "Autonomous")
+public class FigureEight extends LinearOpMode {
 
     private Follower follower;
 
     private final PoseFactory poseFactory = PoseFactory.degrees();
 
     private final Pose start = poseFactory.of(72, 72, 90);
-    private final Pose path1 = poseFactory.of(126, 72, -64.6226);
-    private final Pose path1Control1 = poseFactory.of(85, 100, 0);
-    private final Pose path1Control2 = poseFactory.of(113, 100, 0);
-    private final Pose point2 = poseFactory.of(72, 72, 115.3774);
-    private final Pose point2Control1 = poseFactory.of(113, 44, 0);
-    private final Pose point2Control2 = poseFactory.of(85, 44, 0);
-    private final Pose point3 = poseFactory.of(18, 72, -116.992);
-    private final Pose point3Control1 = poseFactory.of(58, 100, 0);
-    private final Pose point3Control2 = poseFactory.of(32, 100, 0);
-    private final Pose point4 = poseFactory.of(72, 72, 63.008);
-    private final Pose point4Control1 = poseFactory.of(32, 44, 0);
-    private final Pose point4Control2 = poseFactory.of(58, 44, 0);
+    private final Pose path1 = poseFactory.of(72, 72, 0);
+    private final Pose point2 = poseFactory.of(72, 72, 36.3844);
+    private final Pose point2Control1 = poseFactory.of(36, 108, 0);
+    private final Pose point2Control2 = poseFactory.of(24, 36, 0);
+    private final Pose point3 = poseFactory.of(72, 72, 143.6156);
+    private final Pose point3Control1 = poseFactory.of(108, 108, 0);
+    private final Pose point3Control2 = poseFactory.of(120, 36, 0);
 
     // Autonomous routine
     public Command autoRoutine() {
@@ -44,7 +38,12 @@ public class FigureEightLarge extends LinearOpMode {
                 follow(follower, path1()),
                 follow(follower, path2()),
                 follow(follower, path3()),
-                follow(follower, path4())
+                follow(follower, path1()),
+                follow(follower, path2()),
+                follow(follower, path3()),
+                follow(follower, path1()),
+                follow(follower, path2()),
+                follow(follower, path3())
         );
     }
 
@@ -76,7 +75,7 @@ public class FigureEightLarge extends LinearOpMode {
     }
 
     public Path path1() {
-        return curve(start, path1Control1, path1Control2, path1).tangent();
+        return line(start, path1).tangent();
     }
 
     public Path path2() {
@@ -85,9 +84,5 @@ public class FigureEightLarge extends LinearOpMode {
 
     public Path path3() {
         return curve(point2, point3Control1, point3Control2, point3).tangent();
-    }
-
-    public Path path4() {
-        return curve(point3, point4Control1, point4Control2, point4).tangent();
     }
 }
