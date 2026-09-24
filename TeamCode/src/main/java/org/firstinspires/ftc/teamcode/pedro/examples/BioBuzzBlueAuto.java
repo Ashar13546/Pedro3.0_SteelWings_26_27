@@ -42,7 +42,7 @@ public class BioBuzzBlueAuto extends LinearOpMode {
     public void runOpMode() {
         Scheduler.reset();
         follower = Constants.create(hardwareMap);
-        follower.setPose(start);
+        follower.setPose(point11Start);
         follower.update();
 
         waitForStart();
