@@ -18,7 +18,7 @@ public class DiagnosticTest extends LinearOpMode {
         limelight = hardwareMap.get(Limelight3A.class, "limelight");
 
         limelight.setPollRateHz(100);
-        limelight.pipelineSwitch(2);
+        limelight.pipelineSwitch(0);
         limelight.start();
 
         waitForStart();
@@ -38,7 +38,7 @@ public class DiagnosticTest extends LinearOpMode {
             telemetry.addData("Fiducials", detections == null ? "NULL" : detections.size());
 
             if (detections != null) {
-                for (LLResultTypes.FiducialResult detection :detections) {
+                for (LLResultTypes.FiducialResult detection : detections) {
                     telemetry.addData("Tag", "ID %d X %.2f Y %.2f", detection.getFiducialId(), detection.getTargetXDegrees(), detection.getTargetYDegrees());
                 }
             }

@@ -9,19 +9,17 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.teamcode.pedro.Constants;
 import org.firstinspires.ftc.teamcode.pedro.examples.subclasses.IntakeSubclass;
-import org.firstinspires.ftc.teamcode.pedro.examples.subclasses.ServoSubclass;
 import org.firstinspires.ftc.teamcode.pedro.examples.subclasses.ShooterSubclass;
 import org.firstinspires.ftc.teamcode.pedro.examples.subclasses.TransferSubclass;
 
-@TeleOp(name = "BlueField W/Subsystems")
-public class BlueFieldSubsystems extends OpMode {
+@TeleOp(name = "Test2329")
+public class FieldSubsystemE extends OpMode {
 
     private Follower follower;
 
     private IntakeSubclass intake;
     private ShooterSubclass shooter;
     private TransferSubclass transfer;
-    private ServoSubclass servo;
 
     @Override
     public void init() {
@@ -30,12 +28,10 @@ public class BlueFieldSubsystems extends OpMode {
         intake = new IntakeSubclass();
         shooter = new ShooterSubclass();
         transfer = new TransferSubclass();
-        servo = new ServoSubclass();
 
         intake.init(hardwareMap);
         shooter.init(hardwareMap);
         transfer.init(hardwareMap);
-        servo.init(hardwareMap);
     }
 
     @Override
@@ -72,14 +68,6 @@ public class BlueFieldSubsystems extends OpMode {
             transfer.transferReverse();
         } else {
             transfer.transferOff();
-        }
-
-        if (gamepad1.dpad_up) {
-            servo.servoIncrementUp();
-        }
-
-        if (gamepad1.dpad_down) {
-            servo.servoIncrementDown();
         }
     }
 }

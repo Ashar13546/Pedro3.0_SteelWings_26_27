@@ -9,12 +9,12 @@ import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 
 public class ShooterSubclass {
     DcMotorEx shooterMotor;
-    public static double P = 70.0;
+    public static double P = 80.0;
     public static double I = 0.0;
     public static double D = 8.0;
     public static double F = 13.5;
 
-    public static double TARGET_VELOCITY = 1500.0;
+    public static double TARGET_VELOCITY = 2000.0;
 
     public void init(HardwareMap hardwareMap) {
 
