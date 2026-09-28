@@ -16,6 +16,10 @@ public class TransferSubclass {
         transferMotor.setPower(1.0);
     }
 
+    public void transferReverse() {
+        transferMotor.setPower(-1.0);
+    }
+
     public void transferOff() {
         transferMotor.setPower(0);
     }

@@ -20,5 +20,9 @@ public class IntakeSubclass {
         intakeMotor.setPower(0);
     }
 
+    public void intakeReverse() {
+        intakeMotor.setPower(-1.0);
+    }
+
 
 }
