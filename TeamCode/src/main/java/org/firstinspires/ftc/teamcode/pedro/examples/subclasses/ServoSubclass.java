@@ -1,16 +1,23 @@
 package org.firstinspires.ftc.teamcode.pedro.examples.subclasses;
 
-import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
+@Config
 public class ServoSubclass {
+
     private Servo servo;
-    private double servoPos = 0.5;
+    public static double servoPos = 0.5;
 
     public void init(HardwareMap hardwareMap) {
-        servo = hardwareMap.get(Servo.class, "servo");
-        servo.setPosition(0.5);
+        servo = hardwareMap.get(Servo.class,"servo");
+        servo.setPosition(servoPos);
+    }
+
+    public void update() {
+        servoPos = Math.max(0.0, Math.min(1.0, servoPos));
+        servo.setPosition(servoPos);
     }
 
     public void servo1() {
@@ -30,13 +37,21 @@ public class ServoSubclass {
 
     public void servoIncrementUp() {
         servoPos += 0.01;
+
+        servoPos = Math.min(1.0, servoPos);
+
         servo.setPosition(servoPos);
     }
 
     public void servoIncrementDown() {
         servoPos -= 0.01;
+
+        servoPos = Math.max(0.0,servoPos);
+
         servo.setPosition(servoPos);
     }
 
-
+    public double getPosition() {
+        return servo.getPosition();
+    }
 }

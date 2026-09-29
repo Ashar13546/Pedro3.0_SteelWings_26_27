@@ -1,14 +1,16 @@
 package org.firstinspires.ftc.teamcode.pedro.examples.subclasses;
 
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 
+@Config
 public class ShooterSubclass {
-    DcMotorEx shooterMotor;
+
+    private DcMotorEx shooterMotor;
+
     public static double P = 80.0;
     public static double I = 0.0;
     public static double D = 8.0;
@@ -17,13 +19,14 @@ public class ShooterSubclass {
     public static double TARGET_VELOCITY = 2000.0;
 
     public void init(HardwareMap hardwareMap) {
-
-        shooterMotor = hardwareMap.get(DcMotorEx.class, "shooter");
-
+        shooterMotor = hardwareMap.get(DcMotorEx.class,"shooter");
         shooterMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        updatePIDF();
+    }
 
-        PIDFCoefficients newPidf = new PIDFCoefficients(P, I, D, F);
-        shooterMotor.setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, newPidf);
+    public void updatePIDF() {
+        PIDFCoefficients pidf = new PIDFCoefficients(P,I,D,F);
+        shooterMotor.setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, pidf);
     }
 
     public void shooterOn() {
@@ -32,5 +35,13 @@ public class ShooterSubclass {
 
     public void shooterOff() {
         shooterMotor.setVelocity(0);
+    }
+
+    public double getVelocity() {
+        return shooterMotor.getVelocity();
+    }
+
+    public double getPower() {
+        return shooterMotor.getPower();
     }
 }
