@@ -36,7 +36,7 @@ public class ServoSubclass {
     }
 
     public void servoIncrementUp() {
-        servoPos += 0.01;
+        servoPos += 0.001;
 
         servoPos = Math.min(1.0, servoPos);
 
@@ -44,7 +44,7 @@ public class ServoSubclass {
     }
 
     public void servoIncrementDown() {
-        servoPos -= 0.01;
+        servoPos -= 0.001;
 
         servoPos = Math.max(0.0,servoPos);
 

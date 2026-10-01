@@ -13,7 +13,7 @@ public class IntakeSubclass {
     }
 
     public void intakeOn() {
-        intakeMotor.setPower(1.0);
+        intakeMotor.setPower(0.5);
     }
 
     public void intakeOff() {
@@ -21,7 +21,7 @@ public class IntakeSubclass {
     }
 
     public void intakeReverse() {
-        intakeMotor.setPower(-1.0);
+        intakeMotor.setPower(-0.5);
     }
 
 

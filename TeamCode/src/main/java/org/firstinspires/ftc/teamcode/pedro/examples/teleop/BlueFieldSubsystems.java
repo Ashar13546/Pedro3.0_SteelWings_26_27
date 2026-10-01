@@ -81,5 +81,6 @@ public class BlueFieldSubsystems extends OpMode {
         if (gamepad1.dpad_down) {
             servo.servoIncrementDown();
         }
+
     }
 }

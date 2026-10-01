@@ -16,7 +16,7 @@ public class ShooterSubclass {
     public static double D = 8.0;
     public static double F = 13.5;
 
-    public static double TARGET_VELOCITY = 2000.0;
+    public static double TARGET_VELOCITY = 1800;
 
     public void init(HardwareMap hardwareMap) {
         shooterMotor = hardwareMap.get(DcMotorEx.class,"shooter");
