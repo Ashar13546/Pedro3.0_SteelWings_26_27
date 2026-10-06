@@ -80,6 +80,18 @@ public class BlueRobotCentric extends OpMode {
         if (gamepad1.dpad_down) {
             servo.servoIncrementDown();
         }
+        telemetry.addData("Target RPM", ShooterSubclass.targetRPM);
+        telemetry.addData("Actual RPM", shooter.getRPM());
+        telemetry.addData("RPM Error",ShooterSubclass.targetRPM - shooter.getRPM());
+
+        telemetry.addData("P", ShooterSubclass.P);
+        telemetry.addData("I", ShooterSubclass.I);
+        telemetry.addData("D", ShooterSubclass.D);
+        telemetry.addData("F", ShooterSubclass.F);
+
+        telemetry.addData("Servo Pos", servo.getPosition());
+
+        telemetry.update();
 
     }
 }
