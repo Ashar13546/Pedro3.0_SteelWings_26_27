@@ -52,9 +52,9 @@ public class ShooterMechanismTest extends OpMode {
         ServoSubclass.servoPos = Math.max(0.0, Math.min(1.0, ServoSubclass.servoPos));
 
 
-        telemetry.addData("Target Velocity", ShooterSubclass.TARGET_VELOCITY);
-        telemetry.addData("Actual Velocity", shooter.getVelocity());
-        telemetry.addData("V Error",ShooterSubclass.TARGET_VELOCITY - shooter.getVelocity());
+        telemetry.addData("Target RPM", ShooterSubclass.targetRPM);
+        telemetry.addData("Actual RPM", shooter.getRPM());
+        telemetry.addData("RPM Error",ShooterSubclass.targetRPM - shooter.getRPM());
 
         telemetry.addData("P", ShooterSubclass.P);
         telemetry.addData("I", ShooterSubclass.I);
