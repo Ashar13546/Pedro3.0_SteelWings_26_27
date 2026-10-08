@@ -12,6 +12,11 @@ public class IntakeSubclass {
         intakeMotor.setPower(0);
     }
 
+
+    public void setIntakePower(double power) {
+        intakeMotor.setPower(power);
+    }
+
     public void intakeOn() {
         intakeMotor.setPower(0.5);
     }

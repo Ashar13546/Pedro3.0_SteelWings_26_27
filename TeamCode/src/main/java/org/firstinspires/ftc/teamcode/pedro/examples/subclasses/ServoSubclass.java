@@ -20,6 +20,16 @@ public class ServoSubclass {
         servo.setPosition(servoPos);
     }
 
+    public void servoBlock() {
+        servoPos = 0.75;
+        servo.setPosition(servoPos);
+    }
+
+    public void servoShoot() {
+        servoPos = 0.5;
+        servo.setPosition(servoPos);
+    }
+
     public void servo1() {
         servoPos = 1.0;
         servo.setPosition(servoPos);

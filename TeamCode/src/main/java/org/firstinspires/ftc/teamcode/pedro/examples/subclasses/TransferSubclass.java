@@ -14,6 +14,10 @@ public class TransferSubclass {
         transferMotor2.setPower(0);
     }
 
+    public void setTransferPower(double power) {
+        transferMotor.setPower(power);
+        transferMotor2.setPower(power);
+    }
     public void transferOn() {
         transferMotor.setPower(1.0);
         transferMotor2.setPower(1.0);
