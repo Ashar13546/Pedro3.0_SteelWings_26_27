@@ -10,8 +10,8 @@ import org.firstinspires.ftc.teamcode.pedro.examples.subclasses.ServoSubclass;
 import org.firstinspires.ftc.teamcode.pedro.examples.subclasses.ShooterSubclass;
 import org.firstinspires.ftc.teamcode.pedro.examples.subclasses.TransferSubclass;
 
-@TeleOp(name = "Anthony's Analog")
-public class AnthonyAnalog extends OpMode {
+@TeleOp(name = "Anthony's Analog 2")
+public class AnthonyAnalog2 extends OpMode {
 
     private Follower follower;
 
@@ -61,16 +61,12 @@ public class AnthonyAnalog extends OpMode {
 // Shooter
         if (gamepad1.right_trigger > 0.05) {
             shooter.shooterOn();
-        } else {
-            shooter.shooterOff();
-        }
-
-// Servo
-        if (gamepad1.right_bumper) {
             servo.servoShoot();
         } else {
+            shooter.shooterOff();
             servo.servoBlock();
         }
+
 
         telemetry.addData("Target RPM", ShooterSubclass.targetRPM);
         telemetry.addData("Actual RPM", shooter.getRPM());

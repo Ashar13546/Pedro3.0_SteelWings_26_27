@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.pedro.examples.teleop;
 import com.pedropathing.follower.Follower;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.pedro.Constants;
 import org.firstinspires.ftc.teamcode.pedro.examples.subclasses.IntakeSubclass;
@@ -10,8 +11,8 @@ import org.firstinspires.ftc.teamcode.pedro.examples.subclasses.ServoSubclass;
 import org.firstinspires.ftc.teamcode.pedro.examples.subclasses.ShooterSubclass;
 import org.firstinspires.ftc.teamcode.pedro.examples.subclasses.TransferSubclass;
 
-@TeleOp(name = "Anthony's Analog")
-public class AnthonyAnalog extends OpMode {
+@TeleOp(name = "Anthony's Analog 3")
+public class AnthonyAnalog3 extends OpMode {
 
     private Follower follower;
 
@@ -19,6 +20,7 @@ public class AnthonyAnalog extends OpMode {
     private ShooterSubclass shooter;
     private TransferSubclass transfer;
     private ServoSubclass servo;
+
 
     @Override
     public void init() {
@@ -61,14 +63,11 @@ public class AnthonyAnalog extends OpMode {
 // Shooter
         if (gamepad1.right_trigger > 0.05) {
             shooter.shooterOn();
+            if (gamepad1.right_bumper) {
+                servo.servoShoot();
+            }
         } else {
             shooter.shooterOff();
-        }
-
-// Servo
-        if (gamepad1.right_bumper) {
-            servo.servoShoot();
-        } else {
             servo.servoBlock();
         }
 
