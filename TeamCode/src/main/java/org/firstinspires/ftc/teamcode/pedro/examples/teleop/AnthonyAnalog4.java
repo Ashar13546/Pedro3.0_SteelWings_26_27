@@ -1,6 +1,8 @@
 package org.firstinspires.ftc.teamcode.pedro.examples.teleop;
 
+import com.pedropathing.api.PoseFactory;
 import com.pedropathing.follower.Follower;
+import com.pedropathing.math.Pose;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
@@ -71,6 +73,7 @@ public class AnthonyAnalog4 extends OpMode {
         } else {
             shooter.shooterOff();
             servo.servoBlock();
+            servoTimer.reset();
         }
 
         telemetry.addData("Target RPM", ShooterSubclass.targetRPM);

@@ -27,6 +27,17 @@ public class ShooterSubclass {
         shooterMotor.setDirection(DcMotorSimple.Direction.REVERSE);
     }
 
+    public boolean isAtVelocity() {
+        double tolerance = 50;
+
+        return Math.abs(getRPM() - targetRPM) <= tolerance;
+    }
+    public boolean isAtVelocity(double customRPM) {
+        double tolerance = 50;
+
+        return Math.abs(getRPM() - customRPM) <= tolerance;
+    }
+
     public void updatePIDF() {
         PIDFCoefficients pidf = new PIDFCoefficients(P, I, D, F);
     }
@@ -34,8 +45,6 @@ public class ShooterSubclass {
     public void shooterOn() {
         shooterMotor.setVelocity((ticksPerRev * targetRPM)/60.0);
     }
-
-    // overloaded incase different rpm needed for diff points on field
     public void shooterOn(double customRPM) {
         shooterMotor.setVelocity((customRPM * ticksPerRev)/60.0);
     }

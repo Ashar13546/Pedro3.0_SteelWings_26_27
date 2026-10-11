@@ -17,14 +17,17 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.pedro.Constants;
 import org.firstinspires.ftc.teamcode.pedro.examples.subclasses.IntakeSubclass;
+import org.firstinspires.ftc.teamcode.pedro.examples.subclasses.ServoSubclass;
 import org.firstinspires.ftc.teamcode.pedro.examples.subclasses.ShooterSubclass;
+import org.firstinspires.ftc.teamcode.pedro.examples.subclasses.TransferSubclass;
 
 @Autonomous(name = "BlueTest", group = "Autonomous")
 public class BlueTest extends LinearOpMode {
 
     private IntakeSubclass intake = new IntakeSubclass();
-
     private ShooterSubclass shooter = new ShooterSubclass();
+    private TransferSubclass transfer = new TransferSubclass();
+    private ServoSubclass servo = new ServoSubclass();
     private Follower follower;
 
     private final PoseFactory poseFactory = PoseFactory.degrees();
@@ -45,8 +48,11 @@ public class BlueTest extends LinearOpMode {
         follower = Constants.create(hardwareMap);
         follower.setPose(start);
         follower.update();
+
         intake.init(hardwareMap);
         shooter.init(hardwareMap);
+        transfer.init(hardwareMap);
+        servo.init(hardwareMap);
 
         waitForStart();
         schedule(autoRoutine());
@@ -72,10 +78,13 @@ public class BlueTest extends LinearOpMode {
         return sequential(
                 follow(follower, path11()),
                 instant(() -> intake.intakeOn()),
+                instant(() -> transfer.transferOn()),
                 follow(follower, path22()),
                 instant(() -> intake.intakeOff()),
+                instant(() -> transfer.transferOff()),
                 follow(follower, path33()),
-                instant(() -> shooter.shooterOn())
+                instant(() -> shooter.shooterOn()),
+                instant(() -> servo.servoShoot())
         );
     }
 
