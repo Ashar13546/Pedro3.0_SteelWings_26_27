@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 public class ServoSubclass {
 
     private Servo servo;
-    public static double servoPos = 0.5;
+    public static double servoPos = 0.25;
 
     public void init(HardwareMap hardwareMap) {
         servo = hardwareMap.get(Servo.class,"servo");
@@ -21,12 +21,12 @@ public class ServoSubclass {
     }
 
     public void servoBlock() {
-        servoPos = 0.75;
+        servoPos = 0.25; //0.75
         servo.setPosition(servoPos);
     }
 
     public void servoShoot() {
-        servoPos = 0.5;
+        servoPos = 0.50; //0.5
         servo.setPosition(servoPos);
     }
 
