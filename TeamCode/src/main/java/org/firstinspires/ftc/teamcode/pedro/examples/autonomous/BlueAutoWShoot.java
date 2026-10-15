@@ -89,6 +89,17 @@ public class BlueAutoWShoot extends LinearOpMode {
     public void runOpMode() {
         Scheduler.reset();
         follower = Constants.create(hardwareMap);
+        
+        intake = new IntakeSubclass();
+        shooter = new ShooterSubclass();
+        transfer = new TransferSubclass();
+        servo = new ServoSubclass();
+
+        intake.init(hardwareMap);
+        shooter.init(hardwareMap);
+        transfer.init(hardwareMap);
+        servo.init(hardwareMap);
+
         follower.setPose(path1Start);
         follower.update();
 

@@ -21,12 +21,12 @@ public class ServoSubclass {
     }
 
     public void servoBlock() {
-        servoPos = 0.25; //0.75
+        servoPos = 0.30; //0.75
         servo.setPosition(servoPos);
     }
 
     public void servoShoot() {
-        servoPos = 0.50; //0.5
+        servoPos = 0.53; //0.5
         servo.setPosition(servoPos);
     }
 

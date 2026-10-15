@@ -17,7 +17,7 @@ public class ShooterSubclass {
     public static double D = 0.0; // 0.0
     public static double F = 11.72626; // 0.000167
 
-    public static double targetRPM = 3250;
+    public static double targetRPM = 3650;
     public static final double ticksPerRev = 28.0;
 
     public void init(HardwareMap hardwareMap) {

@@ -24,7 +24,7 @@ import org.firstinspires.ftc.teamcode.pedro.examples.subclasses.TransferSubclass
 
 @Autonomous(name = "BlueAuto With Shoot 2 (No Waits)", group = "Autonomous")
 public class BlueAutoWShoot2 extends LinearOpMode {
-
+//ERROR : Nullpointerexception attempts to invoke interface method void com qualcom...... DcmotorEX.setvelocity(double) on a null object reference
     private IntakeSubclass intake = new IntakeSubclass();
     private ShooterSubclass shooter = new ShooterSubclass();
     private TransferSubclass transfer = new TransferSubclass();
@@ -40,6 +40,8 @@ public class BlueAutoWShoot2 extends LinearOpMode {
     private final Pose point3 = poseFactory.of(83, 120, 275);
     private final Pose point4 = poseFactory.of(130, 45, 180);
     private final Pose point4Control1 = poseFactory.of(127, 129, 0);
+
+
 
     public Command autoRoutine() {
         return sequential(
@@ -116,6 +118,17 @@ public class BlueAutoWShoot2 extends LinearOpMode {
     public void runOpMode() {
         Scheduler.reset();
         follower = Constants.create(hardwareMap);
+
+        intake = new IntakeSubclass();
+        shooter = new ShooterSubclass();
+        transfer = new TransferSubclass();
+        servo = new ServoSubclass();
+
+        intake.init(hardwareMap);
+        shooter.init(hardwareMap);
+        transfer.init(hardwareMap);
+        servo.init(hardwareMap);
+
         follower.setPose(path1Start);
         follower.update();
 
