@@ -1,33 +1,33 @@
-package org.firstinspires.ftc.teamcode.pedro.examples.subclasses;
-
-import com.qualcomm.robotcore.hardware.DcMotorEx;
-import com.qualcomm.robotcore.hardware.HardwareMap;
-
-public class IntakeSubclass {
-    private DcMotorEx intakeMotor;
-
-    public void init(HardwareMap hardwareMap) {
-        intakeMotor = hardwareMap.get(DcMotorEx.class, "intake");
-
-        intakeMotor.setPower(0);
-    }
-
-
-    public void setIntakePower(double power) {
-        intakeMotor.setPower(power);
-    }
-
-    public void intakeOn() {
-        intakeMotor.setPower(0.5);
-    }
-
-    public void intakeOff() {
-        intakeMotor.setPower(0);
-    }
-
-    public void intakeReverse() {
-        intakeMotor.setPower(-0.5);
-    }
-
-
-}
+//package org.firstinspires.ftc.teamcode.pedro.examples.subclasses;
+//
+//import com.qualcomm.robotcore.hardware.DcMotorEx;
+//import com.qualcomm.robotcore.hardware.HardwareMap;
+//
+//public class IntakeSubclass {
+//    private DcMotorEx intakeMotor;
+//
+//    public void init(HardwareMap hardwareMap) {
+//        intakeMotor = hardwareMap.get(DcMotorEx.class, "intake");
+//
+//        intakeMotor.setPower(0);
+//    }
+//
+//
+//    public void setIntakePower(double power) {
+//        intakeMotor.setPower(power);
+//    }
+//
+//    public void intakeOn() {
+//        intakeMotor.setPower(0.5);
+//    }
+//
+//    public void intakeOff() {
+//        intakeMotor.setPower(0);
+//    }
+//
+//    public void intakeReverse() {
+//        intakeMotor.setPower(-0.5);
+//    }
+//
+//
+//}

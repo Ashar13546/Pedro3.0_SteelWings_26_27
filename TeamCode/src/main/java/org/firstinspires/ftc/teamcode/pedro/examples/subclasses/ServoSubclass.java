@@ -44,11 +44,6 @@ public class ServoSubclass {
         rampServo.setPosition(rampServoPos);
     }
 
-    public void servoOther() {
-        holdServoPos = 0.9;
-        holdServo.setPosition(holdServoPos);
-    }
-
     public void servoIncrementUp() {
         holdServoPos += 0.001;
 

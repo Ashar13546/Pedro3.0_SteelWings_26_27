@@ -5,7 +5,6 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.pedro.Constants;
-import org.firstinspires.ftc.teamcode.pedro.examples.subclasses.IntakeSubclass;
 import org.firstinspires.ftc.teamcode.pedro.examples.subclasses.ServoSubclass;
 import org.firstinspires.ftc.teamcode.pedro.examples.subclasses.ShooterSubclass;
 import org.firstinspires.ftc.teamcode.pedro.examples.subclasses.TransferSubclass;
@@ -15,7 +14,6 @@ public class AnthonyAnalogFinal2 extends OpMode {
 
     private Follower follower;
 
-    private IntakeSubclass intake;
     private ShooterSubclass shooter;
     private TransferSubclass transfer;
     private ServoSubclass servo;
@@ -29,12 +27,10 @@ public class AnthonyAnalogFinal2 extends OpMode {
     public void init() {
         follower = Constants.create(hardwareMap);
 
-        intake = new IntakeSubclass();
         shooter = new ShooterSubclass();
         transfer = new TransferSubclass();
         servo = new ServoSubclass();
 
-        intake.init(hardwareMap);
         shooter.init(hardwareMap);
         transfer.init(hardwareMap);
         servo.init(hardwareMap);
@@ -53,13 +49,10 @@ public class AnthonyAnalogFinal2 extends OpMode {
 
 // Intake + Transfer
         if (gamepad1.left_trigger > 0.05) {
-            intake.setIntakePower(gamepad1.left_trigger);
             transfer.setTransferPower(gamepad1.left_trigger);
         } else if (gamepad1.left_bumper) {
-            intake.intakeReverse();
             transfer.transferReverse();
         } else {
-            intake.intakeOff();
             transfer.transferOff();
         }
 

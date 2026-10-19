@@ -17,7 +17,6 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.pedro.Constants;
-import org.firstinspires.ftc.teamcode.pedro.examples.subclasses.IntakeSubclass;
 import org.firstinspires.ftc.teamcode.pedro.examples.subclasses.ServoSubclass;
 import org.firstinspires.ftc.teamcode.pedro.examples.subclasses.ShooterSubclass;
 import org.firstinspires.ftc.teamcode.pedro.examples.subclasses.TransferSubclass;
@@ -25,7 +24,6 @@ import org.firstinspires.ftc.teamcode.pedro.examples.subclasses.TransferSubclass
 @Autonomous(name = "BlueAuto With Shoot 3 (No Waits)", group = "Autonomous")
 public class BlueAutoWShoot3 extends LinearOpMode {
     //ERROR : Nullpointerexception attempts to invoke interface method void com qualcom...... DcmotorEX.setvelocity(double) on a null object reference
-    private IntakeSubclass intake = new IntakeSubclass();
     private ShooterSubclass shooter = new ShooterSubclass();
     private TransferSubclass transfer = new TransferSubclass();
     private ServoSubclass servo = new ServoSubclass();
@@ -56,13 +54,11 @@ public class BlueAutoWShoot3 extends LinearOpMode {
                 sequential(
                         instant(() -> {
                             servo.servoShoot();
-                            intake.intakeOn();
                             transfer.transferShoot();
                         }),
                         waitMs(3000),
                         instant(() -> {
                             shooter.shooterOff();
-                            intake.intakeOff();
                             transfer.transferOff();
                             servo.servoBlock();
                         })
@@ -73,12 +69,10 @@ public class BlueAutoWShoot3 extends LinearOpMode {
                         follow(follower, intakePollenPos()),
                         sequential(
                                 instant(() -> {
-                                    intake.intakeOn();
                                     transfer.transferOn();
                                 }),
                                 waitMs(1500),
                                 instant(() -> {
-                                    intake.intakeOff();
                                     transfer.transferOff();
                                 })
                         )
@@ -95,13 +89,11 @@ public class BlueAutoWShoot3 extends LinearOpMode {
                 sequential(
                         instant(() -> {
                             servo.servoShoot();
-                            intake.intakeOn();
                             transfer.transferShoot();
                         }),
                         waitMs(3000),
                         instant(() -> {
                             shooter.shooterOff();
-                            intake.intakeOff();
                             transfer.transferOff();
                             servo.servoBlock();
                         })
@@ -119,12 +111,10 @@ public class BlueAutoWShoot3 extends LinearOpMode {
         Scheduler.reset();
         follower = Constants.create(hardwareMap);
 
-        intake = new IntakeSubclass();
         shooter = new ShooterSubclass();
         transfer = new TransferSubclass();
         servo = new ServoSubclass();
 
-        intake.init(hardwareMap);
         shooter.init(hardwareMap);
         transfer.init(hardwareMap);
         servo.init(hardwareMap);
