@@ -75,10 +75,10 @@ public class AnthonyAnalog3 extends OpMode {
         telemetry.addData("Actual RPM", shooter.getRPM());
         telemetry.addData("RPM Error",ShooterSubclass.targetRPM - shooter.getRPM());
 
-        telemetry.addData("P", ShooterSubclass.P);
-        telemetry.addData("I", ShooterSubclass.I);
-        telemetry.addData("D", ShooterSubclass.D);
-        telemetry.addData("F", ShooterSubclass.F);
+//        telemetry.addData("P", ShooterSubclass.P);
+//        telemetry.addData("I", ShooterSubclass.I);
+//        telemetry.addData("D", ShooterSubclass.D);
+//        telemetry.addData("F", ShooterSubclass.F);
 
         telemetry.addData("Servo Pos", servo.getPosition());
 

@@ -7,61 +7,65 @@ import com.qualcomm.robotcore.hardware.Servo;
 @Config
 public class ServoSubclass {
 
-    private Servo servo;
-    public static double servoPos = 0.25;
+    private Servo holdServo, rampServo;
+    public static double holdServoPos = 0.25;
+    public static double rampServoPos = 0.0;
+
 
     public void init(HardwareMap hardwareMap) {
-        servo = hardwareMap.get(Servo.class,"servo");
-        servo.setPosition(servoPos);
+        holdServo = hardwareMap.get(Servo.class,"holdServo");
+        rampServo = hardwareMap.get(Servo.class, "rampServo");
+        holdServo.setPosition(holdServoPos);
+        rampServo.setPosition(rampServoPos);
     }
 
     public void update() {
-        servoPos = Math.max(0.0, Math.min(1.0, servoPos));
-        servo.setPosition(servoPos);
+        holdServoPos = Math.max(0.0, Math.min(1.0, holdServoPos));
+        holdServo.setPosition(holdServoPos);
     }
 
     public void servoBlock() {
-        servoPos = 0.30; //0.75
-        servo.setPosition(servoPos);
+        holdServoPos = 0.30; //0.75
+        holdServo.setPosition(holdServoPos);
     }
 
     public void servoShoot() {
-        servoPos = 0.53; //0.5
-        servo.setPosition(servoPos);
+        holdServoPos = 0.53; //0.5
+        holdServo.setPosition(holdServoPos);
     }
 
-    public void servo1() {
-        servoPos = 1.0;
-        servo.setPosition(servoPos);
+    public void servoUp() {
+        rampServoPos = 1.0;
+        rampServo.setPosition(rampServoPos);
     }
 
-    public void servo0() {
-        servoPos = 0.0;
-        servo.setPosition(servoPos);
+    public void servoDown() {
+        rampServoPos = 0.0;
+        rampServo.setPosition(rampServoPos);
     }
 
     public void servoOther() {
-        servoPos = 0.9;
-        servo.setPosition(servoPos);
+        holdServoPos = 0.9;
+        holdServo.setPosition(holdServoPos);
     }
 
     public void servoIncrementUp() {
-        servoPos += 0.001;
+        holdServoPos += 0.001;
 
-        servoPos = Math.min(1.0, servoPos);
+        holdServoPos = Math.min(1.0, holdServoPos);
 
-        servo.setPosition(servoPos);
+        holdServo.setPosition(holdServoPos);
     }
 
     public void servoIncrementDown() {
-        servoPos -= 0.001;
+        holdServoPos -= 0.001;
 
-        servoPos = Math.max(0.0,servoPos);
+        holdServoPos = Math.max(0.0, holdServoPos);
 
-        servo.setPosition(servoPos);
+        holdServo.setPosition(holdServoPos);
     }
 
     public double getPosition() {
-        return servo.getPosition();
+        return holdServo.getPosition();
     }
 }

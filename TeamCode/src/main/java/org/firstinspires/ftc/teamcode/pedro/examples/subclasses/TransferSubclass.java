@@ -16,11 +16,11 @@ public class TransferSubclass {
 
     public void setTransferPower(double power) {
         transferMotor.setPower(power);
-        transferMotor2.setPower(power);
+        transferMotor2.setPower((power*-0.2));
     }
     public void transferOn() {
         transferMotor.setPower(1.0);
-        transferMotor2.setPower(1.0);
+        transferMotor2.setPower(-0.3);
     }
 
     public void transferReverse() {
@@ -33,5 +33,9 @@ public class TransferSubclass {
         transferMotor2.setPower(0);
     }
 
+    public void transferShoot() {
+        transferMotor.setPower(0.75);
+        transferMotor2.setPower(0.3);
+    }
 
 }
