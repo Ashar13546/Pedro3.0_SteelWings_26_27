@@ -70,6 +70,7 @@ public class AnthonyAnalogFinal3 extends OpMode {
         } else {
             shooter.shooterOff();
         }
+        shooter.update();
 
 // Hold Servo
         if (gamepad1.right_bumper && !lastRB) {

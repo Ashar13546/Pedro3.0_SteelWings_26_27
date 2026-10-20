@@ -55,12 +55,12 @@ public class AnthonyAnalog7 extends OpMode {
         }
 
 // Shooter
-        if (gamepad1.right_trigger > 0.05) {
+        if (gamepad1.a) {
             shooter.shooterOn();
         } else {
             shooter.shooterOff();
         }
-
+        shooter.update();
 // Servo
         if (gamepad1.right_bumper && !lastRB) {
             servoToggled = !servoToggled;
