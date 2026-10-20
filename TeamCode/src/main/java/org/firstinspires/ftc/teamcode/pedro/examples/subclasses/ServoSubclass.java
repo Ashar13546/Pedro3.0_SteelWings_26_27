@@ -44,23 +44,34 @@ public class ServoSubclass {
         rampServo.setPosition(rampServoPos);
     }
 
-    public void servoIncrementUp() {
-        holdServoPos += 0.001;
-
-        holdServoPos = Math.min(1.0, holdServoPos);
+    public void holdServoIncrementUp() {
+        holdServoPos = Math.min(1.0, holdServoPos + 0.01);
 
         holdServo.setPosition(holdServoPos);
     }
 
-    public void servoIncrementDown() {
-        holdServoPos -= 0.001;
-
-        holdServoPos = Math.max(0.0, holdServoPos);
+    public void holdServoIncrementDown() {
+        holdServoPos = Math.max(0.0, holdServoPos - 0.01);
 
         holdServo.setPosition(holdServoPos);
     }
 
-    public double getPosition() {
+    public void rampServoIncrementUp() {
+        rampServoPos = Math.min(1.0, rampServoPos + 0.01);
+
+        rampServo.setPosition(rampServoPos);
+    }
+
+    public void rampServoIncrementDown() {
+        rampServoPos = Math.max(0.0, rampServoPos - 0.01);
+
+        rampServo.setPosition(rampServoPos);
+    }
+
+    public double getHoldPosition() {
         return holdServo.getPosition();
+    }
+    public double getRampServoPos() {
+        return rampServo.getPosition();
     }
 }

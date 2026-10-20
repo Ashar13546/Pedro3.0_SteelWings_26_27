@@ -96,7 +96,7 @@ public class AnthonyAnalogFinal2 extends OpMode {
 //        telemetry.addData("D", ShooterSubclass.D);
 //        telemetry.addData("F", ShooterSubclass.F);
 
-        telemetry.addData("Servo Pos", servo.getPosition());
+        telemetry.addData("Servo Pos", servo.getHoldPosition());
 
         telemetry.update();
 

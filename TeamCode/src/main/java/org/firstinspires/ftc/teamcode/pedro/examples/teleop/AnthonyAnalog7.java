@@ -3,7 +3,6 @@ package org.firstinspires.ftc.teamcode.pedro.examples.teleop;
 import com.pedropathing.follower.Follower;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.pedro.Constants;
 import org.firstinspires.ftc.teamcode.pedro.examples.subclasses.ServoSubclass;
@@ -84,7 +83,7 @@ public class AnthonyAnalog7 extends OpMode {
 //        telemetry.addData("D", ShooterSubclass.D);
 //        telemetry.addData("F", ShooterSubclass.F);
 
-        telemetry.addData("Servo Pos", servo.getPosition());
+        telemetry.addData("Servo Pos", servo.getHoldPosition());
 
         telemetry.update();
 
