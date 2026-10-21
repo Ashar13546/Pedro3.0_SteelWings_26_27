@@ -15,13 +15,13 @@ public class ShooterSubclass {
     private VoltageSensor battery;
 
     // Feedforward: power per RPM (1/6000 = 0.000167)
-    public static double kF = 0.00016666;
+    public static double kF = 0.00016667;
     // Proportional: power per RPM of error. Start small!
     public static double kP = 0.0002;
-    public static double kI = 0.0;
+    public static double kI = 0.0002;
     public static double kD = 0.0;
 
-    public static double targetRPM = 3000;
+    public static double targetRPM = 3250;
     public static double tolerance = 50;
     public static double maxRPM = 5000;
     // 0..1, lower = smoother but slower to react
