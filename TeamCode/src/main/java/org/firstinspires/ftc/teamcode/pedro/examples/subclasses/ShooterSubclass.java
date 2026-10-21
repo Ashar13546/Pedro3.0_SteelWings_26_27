@@ -21,7 +21,7 @@ public class ShooterSubclass {
     public static double kI = 0.0002;
     public static double kD = 0.0;
 
-    public static double targetRPM = 3250;
+    public static double targetRPM = 3300;
     public static double tolerance = 50;
     public static double maxRPM = 5000;
     // 0..1, lower = smoother but slower to react
