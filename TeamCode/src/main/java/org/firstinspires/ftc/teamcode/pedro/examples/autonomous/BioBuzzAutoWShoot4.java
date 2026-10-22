@@ -23,7 +23,6 @@ import org.firstinspires.ftc.teamcode.pedro.examples.subclasses.TransferSubclass
 
 @Autonomous(name = "Auto With Shoot 4 right park", group = "Autonomous")
 public class BioBuzzAutoWShoot4 extends LinearOpMode {
-    //ERROR : Nullpointerexception attempts to invoke interface method void com qualcom...... DcmotorEX.setvelocity(double) on a null object reference
     private ShooterSubclass shooter = new ShooterSubclass();
     private TransferSubclass transfer = new TransferSubclass();
     private ServoSubclass servo = new ServoSubclass();
@@ -135,6 +134,7 @@ public class BioBuzzAutoWShoot4 extends LinearOpMode {
 
         while (opModeIsActive()) {
             follower.update();
+            shooter.update();
             Scheduler.execute();
 
             telemetry.addData("x", follower.pose().x());

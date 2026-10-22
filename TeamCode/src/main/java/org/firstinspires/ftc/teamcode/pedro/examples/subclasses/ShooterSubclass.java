@@ -143,4 +143,13 @@ public class ShooterSubclass {
     public double getPower() {
         return lastPower;
     }
+
+    public static void adjustTargetRPM(double change) {
+        targetRPM = Math.max(0, Math.min(maxRPM, targetRPM + change));
+    }
+
+    public static void setTargetRPM(double rpm) {
+        targetRPM = Math.max(0, Math.min(maxRPM, rpm));
+    }
+
 }

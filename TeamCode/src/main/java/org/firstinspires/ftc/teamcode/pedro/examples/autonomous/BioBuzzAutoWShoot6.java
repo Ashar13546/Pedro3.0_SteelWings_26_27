@@ -135,6 +135,7 @@ public class BioBuzzAutoWShoot6 extends LinearOpMode {
 
         while (opModeIsActive()) {
             follower.update();
+            shooter.update();
             Scheduler.execute();
 
             telemetry.addData("x", follower.pose().x());
