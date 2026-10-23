@@ -34,7 +34,7 @@ public class TransferSubclass {
     }
 
     public void transferShoot() {
-        transferMotor.setPower(1);
+        transferMotor.setPower(0.5);
         transferMotor2.setPower(0.75);
     }
 
