@@ -12,7 +12,7 @@ import org.firstinspires.ftc.teamcode.pedro.examples.subclasses.TransferSubclass
 
 import static com.pedropathing.api.Paths.line;
 
-@TeleOp(name = "Anthony's Analog Finaler5")
+@TeleOp(name = "Freaky Furry (V15)")
 public class AnthonyAnalogFinaler5 extends OpMode {
 
     private Follower follower;
@@ -111,10 +111,10 @@ public class AnthonyAnalogFinaler5 extends OpMode {
         } else {
             transfer.transferOff();
         }
-
+// fix later
         if (gamepad1.right_trigger > 0.05) {
             shooter.shooterOn(ShooterSubclass.targetRPM);
-            if (shooter.isAtVelocity() && !hasRumbled) {
+            if (shooter.isAtVelocity(3300) && !hasRumbled) {
                 gamepad1.rumble(500);
                 hasRumbled = true;
             }

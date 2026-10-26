@@ -20,8 +20,8 @@ import org.firstinspires.ftc.teamcode.pedro.Constants;
 import org.firstinspires.ftc.teamcode.pedro.examples.subclasses.ServoSubclass;
 import org.firstinspires.ftc.teamcode.pedro.examples.subclasses.ShooterSubclass;
 import org.firstinspires.ftc.teamcode.pedro.examples.subclasses.TransferSubclass;
-
-@Autonomous(name = "Auto With Shoot right park -180 HEADING", group = "Autonomous")
+//uto With Shoot right park right init -180 HEADING CURRENT RPM IS 3150
+@Autonomous(name = "Side Wall Right Park", group = "Autonomous")
 public class BioBuzzAutoWShoot9 extends LinearOpMode {
     private ShooterSubclass shooter = new ShooterSubclass();
     private TransferSubclass transfer = new TransferSubclass();
@@ -35,7 +35,7 @@ public class BioBuzzAutoWShoot9 extends LinearOpMode {
     private final Pose path1 = poseFactory.of(83, 120, 95);
     private final Pose point2 = poseFactory.of(125, 95, 0);
     private final Pose point3 = poseFactory.of(83, 120, 95);
-    private final Pose point4 = poseFactory.of(130, 45, 180);
+    private final Pose point4 = poseFactory.of(125, 45, 180); // 130
     private final Pose point4Control1 = poseFactory.of(40, 6, 0);
 
 
@@ -48,8 +48,8 @@ public class BioBuzzAutoWShoot9 extends LinearOpMode {
                 follow(follower, shootPos1()),
 
                 // 2. spin up the shooter & wait till targetRPM
-                instant(() -> shooter.shooterOn()),
-                waitUntil(() -> shooter.isAtVelocity()),
+                instant(() -> shooter.shooterOn(3150)),
+                waitUntil(() -> shooter.isAtVelocity(3150)),
 
                 // 3. move servo & turn intake+transfer on for 3s then turn everything off & lower ramp servo
                 sequential(
@@ -87,10 +87,10 @@ public class BioBuzzAutoWShoot9 extends LinearOpMode {
                 // 6. spin up the shooter & wait till targetRPM (again) & raise ramp servo
 
                 instant(() -> {
-                    shooter.shooterOn();
+                    shooter.shooterOn(3150);
                     servo.servoUp();
                 }),
-                waitUntil(() -> shooter.isAtVelocity()),
+                waitUntil(() -> shooter.isAtVelocity(3150)),
 
                 // 7. move servo & turn intake+transfer on for 3s then turn everything off (again)
                 sequential(
