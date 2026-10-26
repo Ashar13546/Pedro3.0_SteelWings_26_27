@@ -12,7 +12,7 @@ import org.firstinspires.ftc.teamcode.pedro.examples.subclasses.TransferSubclass
 
 import static com.pedropathing.api.Paths.line;
 
-@TeleOp(name = "Freaky Furry (V15)")
+@TeleOp(name = "Main TeleOp 2 Saved Pos")
 public class AnthonyAnalogFinaler5 extends OpMode {
 
     private Follower follower;
@@ -59,10 +59,12 @@ public class AnthonyAnalogFinaler5 extends OpMode {
         if (gamepad1.dpad_left && !lastDpadLeft) {
             savedPose = follower.pose();
         }
+        lastDpadLeft = gamepad1.dpad_left;
+
         if (gamepad1.dpad_up && !lastUp) {
             savedPose2 = follower.pose();
         }
-        lastUp = gamepad1.dpad_left;
+        lastUp = gamepad1.dpad_up;
 
         if (gamepad1.dpad_right && !lastDpadRight && savedPose != null) {
             Pose currentPose = follower.pose();
@@ -114,7 +116,7 @@ public class AnthonyAnalogFinaler5 extends OpMode {
 // fix later
         if (gamepad1.right_trigger > 0.05) {
             shooter.shooterOn(ShooterSubclass.targetRPM);
-            if (shooter.isAtVelocity(3300) && !hasRumbled) {
+            if (shooter.isAtVelocity(ShooterSubclass.targetRPM) && !hasRumbled) {
                 gamepad1.rumble(500);
                 hasRumbled = true;
             }
