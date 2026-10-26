@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.pedro.examples.autonomous;
+package org.firstinspires.ftc.teamcode.pedro.examples.frog.autonomous;
 
 import static com.pedropathing.api.Paths.*;
 
@@ -17,9 +17,9 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.pedro.Constants;
-import org.firstinspires.ftc.teamcode.pedro.examples.subclasses.ServoSubclass;
-import org.firstinspires.ftc.teamcode.pedro.examples.subclasses.ShooterSubclass;
-import org.firstinspires.ftc.teamcode.pedro.examples.subclasses.TransferSubclass;
+import org.firstinspires.ftc.teamcode.pedro.examples.frog.subclasses.ServoSubclass;
+import org.firstinspires.ftc.teamcode.pedro.examples.frog.subclasses.ShooterSubclass;
+import org.firstinspires.ftc.teamcode.pedro.examples.frog.subclasses.TransferSubclass;
 
 @Autonomous(name = "Back Wall Right Park", group = "Autonomous")
 public class BioBuzzAutoWShoot12 extends LinearOpMode {

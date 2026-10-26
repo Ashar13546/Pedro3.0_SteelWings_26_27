@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.pedro.examples.teleop;
+package org.firstinspires.ftc.teamcode.pedro.examples.frog.teleop;
 
 import com.pedropathing.follower.Follower;
 import com.pedropathing.math.Pose;
@@ -6,9 +6,9 @@ import com.pedropathing.paths.Path;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import org.firstinspires.ftc.teamcode.pedro.Constants;
-import org.firstinspires.ftc.teamcode.pedro.examples.subclasses.ServoSubclass;
-import org.firstinspires.ftc.teamcode.pedro.examples.subclasses.ShooterSubclass;
-import org.firstinspires.ftc.teamcode.pedro.examples.subclasses.TransferSubclass;
+import org.firstinspires.ftc.teamcode.pedro.examples.frog.subclasses.ServoSubclass;
+import org.firstinspires.ftc.teamcode.pedro.examples.frog.subclasses.ShooterSubclass;
+import org.firstinspires.ftc.teamcode.pedro.examples.frog.subclasses.TransferSubclass;
 
 import static com.pedropathing.api.Paths.line;
 
@@ -113,7 +113,6 @@ public class AnthonyAnalogFinaler5 extends OpMode {
         } else {
             transfer.transferOff();
         }
-// fix later
         if (gamepad1.right_trigger > 0.05) {
             shooter.shooterOn(ShooterSubclass.targetRPM);
             if (shooter.isAtVelocity(ShooterSubclass.targetRPM) && !hasRumbled) {

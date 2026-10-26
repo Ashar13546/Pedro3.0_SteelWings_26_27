@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.pedro.examples.tests;
+package org.firstinspires.ftc.teamcode.pedro.examples.frog.tests;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
