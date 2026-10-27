@@ -51,7 +51,7 @@ public class ShooterSubclass {
 
         for (DcMotorEx m : new DcMotorEx[]{shooterMotor, shooterMotor2}) {
             m.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            // Encoder is still read, but we drive with raw power from our own loop
+            // Encoder is still ignore, but we drive with raw power from our own loop
             m.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
             m.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
         }
