@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.pedro.examples.frog.teleop;
+package org.firstinspires.ftc.teamcode.pedro.examples.leap.teleop;
 
 import com.pedropathing.follower.Follower;
 import com.pedropathing.math.Pose;
@@ -6,9 +6,9 @@ import com.pedropathing.paths.Path;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import org.firstinspires.ftc.teamcode.pedro.Constants;
-import org.firstinspires.ftc.teamcode.pedro.examples.frog.subclasses.ServoSubclass;
-import org.firstinspires.ftc.teamcode.pedro.examples.frog.subclasses.ShooterSubclass;
-import org.firstinspires.ftc.teamcode.pedro.examples.frog.subclasses.TransferSubclass;
+import org.firstinspires.ftc.teamcode.pedro.examples.leap.subclasses.ServoSubclass;
+import org.firstinspires.ftc.teamcode.pedro.examples.leap.subclasses.ShooterSubclass;
+import org.firstinspires.ftc.teamcode.pedro.examples.leap.subclasses.TransferSubclass;
 
 import static com.pedropathing.api.Paths.line;
 

@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.pedro.examples.frog.autonomous;
+package org.firstinspires.ftc.teamcode.pedro.examples.leap.autonomous;
 
 import static com.pedropathing.api.Paths.*;
 
@@ -17,12 +17,13 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.pedro.Constants;
-import org.firstinspires.ftc.teamcode.pedro.examples.frog.subclasses.ServoSubclass;
-import org.firstinspires.ftc.teamcode.pedro.examples.frog.subclasses.ShooterSubclass;
-import org.firstinspires.ftc.teamcode.pedro.examples.frog.subclasses.TransferSubclass;
-//uto With Shoot right park right init -180 HEADING CURRENT RPM IS 3150
-@Autonomous(name = "Side Wall Right Park", group = "Autonomous")
-public class BioBuzzAutoWShoot9 extends LinearOpMode {
+import org.firstinspires.ftc.teamcode.pedro.examples.leap.subclasses.ServoSubclass;
+import org.firstinspires.ftc.teamcode.pedro.examples.leap.subclasses.ShooterSubclass;
+import org.firstinspires.ftc.teamcode.pedro.examples.leap.subclasses.TransferSubclass;
+
+@Autonomous(name = "Back Wall Left Park", group = "Autonomous")
+public class BioBuzzAutoWShoot11 extends LinearOpMode {
+    //ERROR : Nullpointerexception attempts to invoke interface method void com qualcom...... DcmotorEX.setvelocity(double) on a null object reference
     private ShooterSubclass shooter = new ShooterSubclass();
     private TransferSubclass transfer = new TransferSubclass();
     private ServoSubclass servo = new ServoSubclass();
@@ -31,12 +32,12 @@ public class BioBuzzAutoWShoot9 extends LinearOpMode {
     private final PoseFactory poseFactory = PoseFactory.degrees();
 
     private final Pose start = poseFactory.of(132, 118, 90);
-    private final Pose path1Start = poseFactory.of(132, 118, 180);
-    private final Pose path1 = poseFactory.of(83, 120, 95);
+    private final Pose path1Start = poseFactory.of(94.33, 131, 270);
+    private final Pose path1 = poseFactory.of(83, 120, 275-180);
     private final Pose point2 = poseFactory.of(125, 95, 0);
-    private final Pose point3 = poseFactory.of(83, 120, 95);
-    private final Pose point4 = poseFactory.of(125, 45, 180); // 130
-    private final Pose point4Control1 = poseFactory.of(40, 6, 0);
+    private final Pose point3 = poseFactory.of(83, 120, 275-180);
+    private final Pose point4 = poseFactory.of(125, 25, 180); //x 130
+    private final Pose point4Control1 = poseFactory.of(45, 15, 0);
 
 
 
