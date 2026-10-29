@@ -1,33 +1,26 @@
 package org.firstinspires.ftc.teamcode.pedro.examples.frog.subclasses;
 
-import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.VoltageSensor;
 
-@Config
 public class ShooterSubclass {
-
     private DcMotorEx shooterMotor;   // config name: "shooter"
     private DcMotorEx shooterMotor2;  // config name: "shooter2"
     private VoltageSensor battery;
 
-    // Feedforward: power per RPM (1/6000 = 0.000167)
-    public static double kF = 0.00016667;
-    // Proportional: power per RPM of error. Start small!
-    public static double kP = 0.0002;
-    public static double kI = 0.0002;
+    public static double kF = 0.0001424; //0.000167
+    public static double kP = 0.0002; //0.00015, 0.001
+    public static double kI = 0.00001;
     public static double kD = 0.0;
 
     public static double targetRPM = 3300;
     public static double tolerance = 50;
     public static double maxRPM = 5000;
-    // 0..1, lower = smoother but slower to react
     public static double filterAlpha = 0.3;
-    // Max power change per second (soft start)
-    public static double rampPerSec = 3.0;
+    public static double rampPerSec = 2.5;
 
     public static final double ticksPerRev = 28.0;
     public static final double NOMINAL_VOLTAGE = 14.0;
@@ -51,11 +44,11 @@ public class ShooterSubclass {
 
         for (DcMotorEx m : new DcMotorEx[]{shooterMotor, shooterMotor2}) {
             m.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            // Encoder is still read, but we drive with raw power from our own loop
             m.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
             m.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
         }
         lastTimeNs = System.nanoTime();
+        filteredRPM = 0;
     }
 
     public void shooterOn() {
@@ -64,6 +57,11 @@ public class ShooterSubclass {
 
     public void shooterOn(double customRPM) {
         activeTarget = Math.min(customRPM, maxRPM);
+        if (!on) {
+            lastPower = 0;
+            integral = 0;
+            lastError = 0;
+        }
         on = true;
     }
 
@@ -85,29 +83,32 @@ public class ShooterSubclass {
         double rawRPM = getRawRPM();
         filteredRPM = filterAlpha * rawRPM + (1 - filterAlpha) * filteredRPM;
 
-        if (!on) return;
+        if (!on) {
+            shooterMotor.setPower(0);
+            shooterMotor2.setPower(0);
+            lastPower = 0;
+            return;
+        }
 
         double error = activeTarget - filteredRPM;
         integral += error * dt;
-        // Anti-windup clamp
         integral = Math.max(-1000, Math.min(1000, integral));
         double derivative = (error - lastError) / dt;
         lastError = error;
 
-        double power = kF * activeTarget
-                + kP * error
-                + kI * integral
-                + kD * derivative;
+        double ffPower = kF * activeTarget;
 
-        // Battery compensation so results don't change as voltage sags
         double volts = Math.max(battery.getVoltage(), 6.0);
-        power *= NOMINAL_VOLTAGE / volts;
+        ffPower *= (NOMINAL_VOLTAGE / volts);
+
+        double power = ffPower + (kP * error) + (kI * integral) + (kD * derivative);
 
         power = Math.max(0, Math.min(1.0, power));
 
-        // Soft-start ramp on the way up only
         double maxStep = rampPerSec * dt;
-        if (power > lastPower + maxStep) power = lastPower + maxStep;
+        if (power > lastPower + maxStep) {
+            power = lastPower + maxStep;
+        }
         lastPower = power;
 
         shooterMotor.setPower(power);
@@ -123,25 +124,20 @@ public class ShooterSubclass {
     }
 
     private double getRawRPM() {
-        double avgTps = (shooterMotor.getVelocity() + shooterMotor2.getVelocity()) / 2.0;
+        double avgTps = (Math.abs(shooterMotor.getVelocity()) + Math.abs(shooterMotor2.getVelocity())) / 2.0;
         return (avgTps / ticksPerRev) * 60.0;
     }
 
-    // Filtered average (use this for telemetry/ready checks)
     public double getRPM() {
         return filteredRPM;
     }
 
     public double getRPM1() {
-        return (shooterMotor.getVelocity() / ticksPerRev) * 60.0;
+        return (Math.abs(shooterMotor.getVelocity()) / ticksPerRev) * 60.0;
     }
 
     public double getRPM2() {
-        return (shooterMotor2.getVelocity() / ticksPerRev) * 60.0;
-    }
-
-    public double getPower() {
-        return lastPower;
+        return (Math.abs(shooterMotor2.getVelocity()) / ticksPerRev) * 60.0;
     }
 
     public static void adjustTargetRPM(double change) {
@@ -152,4 +148,7 @@ public class ShooterSubclass {
         targetRPM = Math.max(0, Math.min(maxRPM, rpm));
     }
 
+    public double getPower() {
+        return lastPower;
+    }
 }
