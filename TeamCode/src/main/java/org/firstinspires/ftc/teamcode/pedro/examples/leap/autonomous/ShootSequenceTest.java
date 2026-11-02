@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.pedro.examples.frog.autonomous;
+package org.firstinspires.ftc.teamcode.pedro.examples.leap.autonomous;
 
 import static com.pedropathing.api.Paths.*;
 
@@ -17,12 +17,13 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.pedro.Constants;
-import org.firstinspires.ftc.teamcode.pedro.examples.frog.subclasses.ServoSubclass;
-import org.firstinspires.ftc.teamcode.pedro.examples.frog.subclasses.ShooterSubclass;
-import org.firstinspires.ftc.teamcode.pedro.examples.frog.subclasses.TransferSubclass;
+import org.firstinspires.ftc.teamcode.pedro.examples.leap.subclasses.ServoSubclass;
+import org.firstinspires.ftc.teamcode.pedro.examples.leap.subclasses.ShootSequence;
+import org.firstinspires.ftc.teamcode.pedro.examples.leap.subclasses.ShooterSubclass;
+import org.firstinspires.ftc.teamcode.pedro.examples.leap.subclasses.TransferSubclass;
 
-@Autonomous(name = "Side Wall Left Park", group = "Autonomous")
-public class BioBuzzAutoWShoot10 extends LinearOpMode {
+@Autonomous(name = "SST Back Wall Left Park", group = "Autonomous")
+public class ShootSequenceTest extends LinearOpMode {
     private ShooterSubclass shooter = new ShooterSubclass();
     private TransferSubclass transfer = new TransferSubclass();
     private ServoSubclass servo = new ServoSubclass();
@@ -31,11 +32,11 @@ public class BioBuzzAutoWShoot10 extends LinearOpMode {
     private final PoseFactory poseFactory = PoseFactory.degrees();
 
     private final Pose start = poseFactory.of(132, 118, 90);
-    private final Pose path1Start = poseFactory.of(132, 118, 180);
+    private final Pose path1Start = poseFactory.of(94.33, 131, 270);
     private final Pose path1 = poseFactory.of(83, 120, 275-180);
     private final Pose point2 = poseFactory.of(125, 95, 0);
     private final Pose point3 = poseFactory.of(83, 120, 275-180);
-    private final Pose point4 = poseFactory.of(125, 25, 180); // x 130
+    private final Pose point4 = poseFactory.of(125, 25, 180); //x 130
     private final Pose point4Control1 = poseFactory.of(45, 15, 0);
 
 
@@ -47,25 +48,9 @@ public class BioBuzzAutoWShoot10 extends LinearOpMode {
                 // 1. drive to shooting position
                 follow(follower, shootPos1()),
 
-                // 2. spin up the shooter & wait till targetRPM
-                instant(() -> shooter.shooterOn(3150)),
-                waitUntil(() -> shooter.isAtVelocity(3150)),
-
-                // 3. move servo & turn intake+transfer on for 3s then turn everything off & lower ramp servo
-                sequential(
-                        instant(() -> {
-                            servo.servoShoot();
-                            transfer.transferShoot();
-                        }),
-                        waitMs(3000),
-                        instant(() -> {
-                            shooter.shooterOff();
-                            transfer.transferOff();
-                            servo.servoBlock();
-                            servo.servoDown();
-                        }),
-                        waitMs(1000)
-                ),
+                // 2. shoot sequence
+                ShootSequence.rapidFire4(3150, shooter, transfer, servo),
+                instant(() -> servo.servoDown()),
 
                 // 4. drive to flower & intake more pollen for 1.5s then stop
                 parallel(
@@ -84,27 +69,9 @@ public class BioBuzzAutoWShoot10 extends LinearOpMode {
                 // 5. drive to shooting pos (again)
                 follow(follower, shootPos2()),
 
-                // 6. spin up the shooter & wait till targetRPM (again) & raise ramp servo
-
-                instant(() -> {
-                    shooter.shooterOn(3150);
-                    servo.servoUp();
-                }),
-                waitUntil(() -> shooter.isAtVelocity(3150)),
-
-                // 7. move servo & turn intake+transfer on for 3s then turn everything off (again)
-                sequential(
-                        instant(() -> {
-                            servo.servoShoot();
-                            transfer.transferShoot();
-                        }),
-                        waitMs(3000),
-                        instant(() -> {
-                            shooter.shooterOff();
-                            transfer.transferOff();
-                            servo.servoBlock();
-                        })
-                ),
+                // 6. shoot sequence & raise ramp servo
+                instant(() -> servo.servoUp()),
+                ShootSequence.rapidFire4(3150, shooter, transfer, servo),
 
                 // 8. drive to park
                 follow(follower, park())

@@ -1,9 +1,9 @@
-package org.firstinspires.ftc.teamcode.pedro.examples.frog.tests;
+package org.firstinspires.ftc.teamcode.pedro.examples.leap.tests;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import org.firstinspires.ftc.teamcode.pedro.examples.frog.subclasses.ShooterTest1;
+import org.firstinspires.ftc.teamcode.pedro.examples.leap.subclasses.ShooterTest1;
 
 @TeleOp(name = "Shooter Tuning")
 public class ShooterTest extends LinearOpMode {

@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.pedro.examples.frog.subclasses;
+package org.firstinspires.ftc.teamcode.pedro.examples.leap.subclasses;
 
 import static com.pedropathing.ivy.commands.Commands.instant;
 import static com.pedropathing.ivy.commands.Commands.waitMs;
@@ -40,7 +40,7 @@ public class ShootSequence {
                 waitMs(pulseOffTime),
 
                 instant(() -> transfer.transferShoot()),
-                waitMs(pulseOnTime),
+                waitMs(2000),
                 instant(() -> transfer.transferOff()),
                 waitMs(pulseOffTime),
 
