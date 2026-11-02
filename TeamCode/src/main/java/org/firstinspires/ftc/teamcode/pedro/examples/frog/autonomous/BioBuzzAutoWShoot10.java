@@ -70,7 +70,7 @@ public class BioBuzzAutoWShoot10 extends LinearOpMode {
                 // 4. drive to flower & intake more pollen for 1.5s then stop
                 parallel(
                         follow(follower, intakePollenPos()),
-                        sequential(
+                        sequential(//f
                                 instant(() -> {
                                     transfer.transferOn();
                                 }),
