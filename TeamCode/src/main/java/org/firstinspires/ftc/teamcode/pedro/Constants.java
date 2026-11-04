@@ -16,6 +16,8 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 
+
+// LEAP CONSTANTS HERE
 public class Constants {
 
     public static MecanumConfig drivetrainConfig = new MecanumConfig(c -> {
