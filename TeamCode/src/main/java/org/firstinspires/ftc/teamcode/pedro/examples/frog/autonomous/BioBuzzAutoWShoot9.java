@@ -20,7 +20,6 @@ import org.firstinspires.ftc.teamcode.pedro.Constants;
 import org.firstinspires.ftc.teamcode.pedro.examples.frog.subclasses.ServoSubclass;
 import org.firstinspires.ftc.teamcode.pedro.examples.frog.subclasses.ShooterSubclass;
 import org.firstinspires.ftc.teamcode.pedro.examples.frog.subclasses.TransferSubclass;
-//uto With Shoot right park right init -180 HEADING CURRENT RPM IS 3150
 @Autonomous(name = "Side Wall Right Park", group = "Autonomous")
 public class BioBuzzAutoWShoot9 extends LinearOpMode {
     private ShooterSubclass shooter = new ShooterSubclass();

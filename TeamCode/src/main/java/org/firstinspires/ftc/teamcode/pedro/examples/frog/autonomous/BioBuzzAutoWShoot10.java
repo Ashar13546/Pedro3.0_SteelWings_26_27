@@ -23,7 +23,6 @@ import org.firstinspires.ftc.teamcode.pedro.examples.frog.subclasses.TransferSub
 
 @Autonomous(name = "Side Wall Left Park", group = "Autonomous")
 public class BioBuzzAutoWShoot10 extends LinearOpMode {
-    //ERROR : Nullpointerexception attempts to invoke interface method void com qualcom...... DcmotorEX.setvelocity(double) on a null object reference
     private ShooterSubclass shooter = new ShooterSubclass();
     private TransferSubclass transfer = new TransferSubclass();
     private ServoSubclass servo = new ServoSubclass();
@@ -71,7 +70,7 @@ public class BioBuzzAutoWShoot10 extends LinearOpMode {
                 // 4. drive to flower & intake more pollen for 1.5s then stop
                 parallel(
                         follow(follower, intakePollenPos()),
-                        sequential(
+                        sequential(//f
                                 instant(() -> {
                                     transfer.transferOn();
                                 }),
