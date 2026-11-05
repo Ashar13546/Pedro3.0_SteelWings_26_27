@@ -23,7 +23,7 @@ public class ShooterSubclass {
     public static double rampPerSec = 2.5;
 
     public static final double ticksPerRev = 28.0;
-    public static final double NOMINAL_VOLTAGE = 14.0;
+    public static final double NOMINAL_VOLTAGE = 12.0;
 
     private boolean on = false;
     private double activeTarget = 0;
