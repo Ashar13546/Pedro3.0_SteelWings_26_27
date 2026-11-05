@@ -11,19 +11,19 @@ public class ShooterSubclass {
     private DcMotorEx shooterMotor2;  // config name: "shooter2"
     private VoltageSensor battery;
 
-    public static double kF = 0.0001424; //0.000167
+    public static double kF = 0.0001450; //0.000167
     public static double kP = 0.0002; //0.00015, 0.001
-    public static double kI = 0.00001;
+    public static double kI = 0.0;
     public static double kD = 0.0;
 
     public static double targetRPM = 3300;
     public static double tolerance = 50;
     public static double maxRPM = 5000;
-    public static double filterAlpha = 0.3;
-    public static double rampPerSec = 2.5;
+    public static double filterAlpha = 1.0;
+    public static double rampPerSec = 99.0;
 
     public static final double ticksPerRev = 28.0;
-    public static final double NOMINAL_VOLTAGE = 12.0;
+    public static final double NOMINAL_VOLTAGE = 12.0; // 12.0 or 14.0
 
     private boolean on = false;
     private double activeTarget = 0;
@@ -105,11 +105,11 @@ public class ShooterSubclass {
 
         power = Math.max(0, Math.min(1.0, power));
 
-        double maxStep = rampPerSec * dt;
-        if (power > lastPower + maxStep) {
-            power = lastPower + maxStep;
-        }
-        lastPower = power;
+//        double maxStep = rampPerSec * dt;
+//        if (power > lastPower + maxStep) {
+//            power = lastPower + maxStep;
+//        }
+//        lastPower = power;
 
         shooterMotor.setPower(power);
         shooterMotor2.setPower(power);
