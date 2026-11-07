@@ -13,6 +13,8 @@ import static com.pedropathing.ivy.Scheduler.schedule;
 import static com.pedropathing.ivy.commands.Commands.*;
 import static com.pedropathing.ivy.groups.Groups.sequential;
 import static com.pedropathing.ivy.pedro.PedroCommands.follow;
+import static org.firstinspires.ftc.teamcode.pedro.examples.frog.subclasses.ShootSequence.rapidFire4;
+
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.pedropathing.paths.interpolator.Interpolator;
@@ -29,6 +31,7 @@ public class CornerAudienceShotRP extends LinearOpMode {
     private ShooterSubclass shooter = new ShooterSubclass();
     private TransferSubclass transfer = new TransferSubclass();
     private ServoSubclass servo = new ServoSubclass();
+
     private Follower follower;
 
     private final PoseFactory poseFactory = PoseFactory.degrees();
@@ -48,7 +51,7 @@ public class CornerAudienceShotRP extends LinearOpMode {
     public Command autoRoutine() {
         return sequential(
                 follow(follower, path1()),
-                ShootSequence.rapidFire4(3150, shooter, transfer, servo),
+                rapidFire4(3150, shooter, transfer, servo),
                 follow(follower, path2()),
                 follow(follower, path3()),
                 follow(follower, path4())
