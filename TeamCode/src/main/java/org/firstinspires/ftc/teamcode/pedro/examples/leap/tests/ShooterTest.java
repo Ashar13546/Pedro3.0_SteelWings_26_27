@@ -12,7 +12,7 @@ public class ShooterTest extends LinearOpMode {
 
     @Override
     public void runOpMode() throws InterruptedException {
-        shooter.init(hardwareMap);
+        shooter.init(hardwareMap);//.
         waitForStart();
 
         while (opModeIsActive()) {
