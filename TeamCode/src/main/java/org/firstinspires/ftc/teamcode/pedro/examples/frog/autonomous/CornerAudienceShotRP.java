@@ -13,7 +13,6 @@ import static com.pedropathing.ivy.Scheduler.schedule;
 import static com.pedropathing.ivy.commands.Commands.*;
 import static com.pedropathing.ivy.groups.Groups.sequential;
 import static com.pedropathing.ivy.pedro.PedroCommands.follow;
-import static org.firstinspires.ftc.teamcode.pedro.examples.frog.subclasses.ShootSequence.rapidFire4;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -50,8 +49,9 @@ public class CornerAudienceShotRP extends LinearOpMode {
     // Autonomous routine
     public Command autoRoutine() {
         return sequential(
+                waitMs(15000),
                 follow(follower, path1()),
-                rapidFire4(3150, shooter, transfer, servo),
+                ShootSequence.rapidFire4(3150, shooter, transfer, servo),
                 follow(follower, path2()),
                 follow(follower, path3()),
                 follow(follower, path4())
