@@ -92,7 +92,7 @@ public class CornerAudienceShotLP extends LinearOpMode {
 
     public Path path1() {
         return Paths.curve(start, path1Control1, path1).heading(Interpolator.piecewise().until(0.3, Interpolator.linear(path1Segment1Start, path1Segment1End)).until(1, Interpolator.facingPoint(path1Segment2Target)).reverse());
-    }
+    }//.
 
     public Path path2() {
         return Paths.line(point2Start, point2).linear(point2Start, point2);
