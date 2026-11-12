@@ -13,7 +13,6 @@ import static com.pedropathing.ivy.Scheduler.schedule;
 import static com.pedropathing.ivy.commands.Commands.*;
 import static com.pedropathing.ivy.groups.Groups.sequential;
 import static com.pedropathing.ivy.pedro.PedroCommands.follow;
-
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.pedropathing.paths.interpolator.Interpolator;
@@ -30,21 +29,20 @@ public class CornerAudienceShotRP extends LinearOpMode {
     private ShooterSubclass shooter = new ShooterSubclass();
     private TransferSubclass transfer = new TransferSubclass();
     private ServoSubclass servo = new ServoSubclass();
-
     private Follower follower;
 
     private final PoseFactory poseFactory = PoseFactory.degrees();
 
     private final Pose start = poseFactory.of(130, 10.5, 90);
-    private final Pose path1 = poseFactory.of(81.5452, 19.5471, 84.9179);
+    private final Pose path1 = poseFactory.of(81.5452, 19.5471, -95.0821);
     private final Pose path1Control1 = poseFactory.of(110.8538, 31.3498, 0);
     private final Pose path1Segment1Start = poseFactory.of(81.5452, 19.5471, 180);
-    private final Pose path1Segment1End = poseFactory.of(81.5452, 19.5471, 180);
+    private final Pose path1Segment1End = poseFactory.of(81.5452, 19.5471, 270);
     private final Pose path1Segment2Target = poseFactory.of(84, 47.15, 0);
-    private final Pose point2 = poseFactory.of(112.109, 43.6621, 38.2736);
-    private final Pose point3 = poseFactory.of(116.4782, 69.0761, 80.245);
-    private final Pose point4Start = poseFactory.of(116.4782, 69.0761, 80);
-    private final Pose point4 = poseFactory.of(125, 45, 180);
+    private final Pose point2 = poseFactory.of(112.109, 43.6621, -141.7264);
+    private final Pose point3Start = poseFactory.of(112.109, 43.6621, -142);
+    private final Pose point3 = poseFactory.of(125, 45, 180);
+    private final Pose point3Control1 = poseFactory.of(117.78, 59.52, 0);
 
     // Autonomous routine
     public Command autoRoutine() {
@@ -53,8 +51,7 @@ public class CornerAudienceShotRP extends LinearOpMode {
                 follow(follower, path1()),
                 ShootSequence.rapidFire4(3150, shooter, transfer, servo),
                 follow(follower, path2()),
-                follow(follower, path3()),
-                follow(follower, path4())
+                follow(follower, path3())
         );
     }
 
@@ -79,7 +76,6 @@ public class CornerAudienceShotRP extends LinearOpMode {
 
         while (opModeIsActive()) {
             follower.update();
-            shooter.update();
             Scheduler.execute();
 
             telemetry.addData("x", follower.pose().x());
@@ -96,18 +92,14 @@ public class CornerAudienceShotRP extends LinearOpMode {
     }
 
     public Path path1() {
-        return Paths.curve(start, path1Control1, path1).heading(Interpolator.piecewise().until(0.3, Interpolator.linear(path1Segment1Start, path1Segment1End)).until(1, Interpolator.facingPoint(path1Segment2Target)).reverse());
+        return Paths.curve(start, path1Control1, path1).heading(Interpolator.piecewise().until(0.3, Interpolator.linear(path1Segment1Start, path1Segment1End)).until(1, Interpolator.facingPoint(path1Segment2Target).reverse()));
     }
 
     public Path path2() {
-        return Paths.line(path1, point2).tangent();
+        return Paths.line(path1, point2).reverseTangent();
     }
 
     public Path path3() {
-        return Paths.line(point2, point3).tangent();
+        return Paths.curve(point3Start, point3Control1, point3).linear(point3Start, point3);
     }
-
-    public Path path4() {
-        return Paths.line(point4Start, point4).linear(point4Start, point4);
-    }
-}//.
+}

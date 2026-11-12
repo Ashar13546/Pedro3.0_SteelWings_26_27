@@ -34,24 +34,23 @@ public class FlowerAudienceShotRP extends LinearOpMode {
     private final PoseFactory poseFactory = PoseFactory.degrees();
 
     private final Pose start = poseFactory.of(80, 10.5, 90);
-    private final Pose path1 = poseFactory.of(81.5452, 19.5471, -95.0821);
-    private final Pose path1Segment1Start = poseFactory.of(81.5452, 19.5471, 270);
-    private final Pose path1Segment1End = poseFactory.of(81.5452, 19.5471, 270);
+    private final Pose path1 = poseFactory.of(81.54, 19.5471, -95.0928);
+    private final Pose path1Segment1Start = poseFactory.of(81.54, 19.5471, 270);
+    private final Pose path1Segment1End = poseFactory.of(81.54, 19.5471, 270);
     private final Pose path1Segment2Target = poseFactory.of(84, 47.15, 0);
-    private final Pose point2 = poseFactory.of(112.109, 43.6621, -141.7264);
-    private final Pose point3 = poseFactory.of(116.4782, 69.0761, -99.755);
-    private final Pose point4Start = poseFactory.of(116.4782, 69.0761, -100);
-    private final Pose point4 = poseFactory.of(125, 45, 180);
+    private final Pose point2 = poseFactory.of(112.109, 43.6621, -141.7312);
+    private final Pose point3Start = poseFactory.of(112.109, 43.6621, -142);
+    private final Pose point3 = poseFactory.of(125, 45, 180);
+    private final Pose point3Control1 = poseFactory.of(117.7813, 59.5198, 0);
 
     // Autonomous routine
     public Command autoRoutine() {
         return sequential(
                 waitMs(15000),
                 follow(follower, path1()),
-                ShootSequence.rapidFire4(3150,shooter,transfer,servo),
+                ShootSequence.rapidFire4(3150, shooter, transfer, servo),
                 follow(follower, path2()),
-                follow(follower, path3()),
-                follow(follower, path4())
+                follow(follower, path3())
         );
     }
 
@@ -76,7 +75,6 @@ public class FlowerAudienceShotRP extends LinearOpMode {
 
         while (opModeIsActive()) {
             follower.update();
-            shooter.update();
             Scheduler.execute();
 
             telemetry.addData("x", follower.pose().x());
@@ -101,10 +99,6 @@ public class FlowerAudienceShotRP extends LinearOpMode {
     }
 
     public Path path3() {
-        return Paths.line(point2, point3).reverseTangent();
-    }
-
-    public Path path4() {
-        return Paths.line(point4Start, point4).linear(point4Start, point4);
+        return Paths.curve(point3Start, point3Control1, point3).linear(point3Start, point3);
     }
 }
