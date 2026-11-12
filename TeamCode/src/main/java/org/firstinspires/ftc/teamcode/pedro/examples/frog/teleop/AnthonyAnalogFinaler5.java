@@ -5,6 +5,8 @@ import com.pedropathing.math.Pose;
 import com.pedropathing.paths.Path;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.util.RobotLog;
+
 import org.firstinspires.ftc.teamcode.pedro.Constants;
 import org.firstinspires.ftc.teamcode.pedro.examples.frog.subclasses.ServoSubclass;
 import org.firstinspires.ftc.teamcode.pedro.examples.frog.subclasses.ShooterSubclass;
@@ -12,7 +14,7 @@ import org.firstinspires.ftc.teamcode.pedro.examples.frog.subclasses.TransferSub
 
 import static com.pedropathing.api.Paths.line;
 
-@TeleOp(name = "Main TeleOp 2 Saved Pos")
+@TeleOp(name = "Robot TeleOp 2 Saved Pos")
 public class AnthonyAnalogFinaler5 extends OpMode {
 
     private Follower follower;
@@ -95,11 +97,21 @@ public class AnthonyAnalogFinaler5 extends OpMode {
         }
 
         if (!weaverDriving) {
-            follower.manual(
-                    Math.signum(-gamepad1.left_stick_y) * Math.pow(Math.abs(gamepad1.left_stick_y), 1.25),
-                    Math.signum(-gamepad1.left_stick_x) * Math.pow(Math.abs(gamepad1.left_stick_x), 1.25),
-                    Math.signum(-gamepad1.right_stick_x) * Math.pow(Math.abs(gamepad1.right_stick_x), 1.25)
-            );
+            if (!gamepad1.a) {
+                follower.manual(
+                        Math.signum(-gamepad1.left_stick_y) * Math.pow(Math.abs(gamepad1.left_stick_y), 1.25),
+                        Math.signum(-gamepad1.left_stick_x) * Math.pow(Math.abs(gamepad1.left_stick_x), 1.25),
+                        Math.signum(-gamepad1.right_stick_x) * Math.pow(Math.abs(gamepad1.right_stick_x), 1.25)
+                );
+            }
+            else {
+                follower.manual(
+                        (-gamepad1.left_stick_y*0.2),
+                        (-gamepad1.left_stick_x*0.2),
+                        (-gamepad1.right_stick_x*0.2)
+                );
+            }
+
         }
 
         follower.update();
@@ -167,10 +179,13 @@ public class AnthonyAnalogFinaler5 extends OpMode {
         lastA = gamepad2.a;
         lastB = gamepad2.b;
 
+        double shooterAmps = shooter.getAmps();
+        telemetry.addData("Shooter Amps", shooterAmps);
+        RobotLog.ii("AmpLog", "RPM: %.1f | Amps: %.2f", shooter.getRPM(), shooterAmps);
+
         telemetry.addData("Target RPM", ShooterSubclass.targetRPM);
         telemetry.addData("Actual RPM", shooter.getRPM());
-        telemetry.addData("RPM Error",
-                ShooterSubclass.targetRPM - shooter.getRPM());
+        telemetry.addData("RPM Error",ShooterSubclass.targetRPM - shooter.getRPM());
         telemetry.addData("Servo Pos", servo.getHoldPosition());
         telemetry.update();
     }

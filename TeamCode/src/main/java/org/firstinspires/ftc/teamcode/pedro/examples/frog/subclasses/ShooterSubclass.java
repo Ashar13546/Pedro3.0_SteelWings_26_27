@@ -6,6 +6,8 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.VoltageSensor;
 
+import org.firstinspires.ftc.robotcore.external.navigation.CurrentUnit;
+
 public class ShooterSubclass {
     private DcMotorEx shooterMotor;   // config name: "shooter"
     private DcMotorEx shooterMotor2;  // config name: "shooter2"
@@ -151,4 +153,8 @@ public class ShooterSubclass {
     public double getPower() {
         return lastPower;
     }
+    public double getAmps() {
+        return shooterMotor.getCurrent(CurrentUnit.AMPS);
+    }
 }
+
