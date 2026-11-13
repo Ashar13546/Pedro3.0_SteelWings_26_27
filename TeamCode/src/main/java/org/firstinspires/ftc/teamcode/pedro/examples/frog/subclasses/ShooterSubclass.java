@@ -19,7 +19,7 @@ public class ShooterSubclass {
     public static double kD = 0.0;
 
     public static double targetRPM = 3300;
-    public static double tolerance = 50;
+    public static double tolerance = 200;
     public static double maxRPM = 5000;
     public static double filterAlpha = 1.0;
     public static double rampPerSec = 99.0;

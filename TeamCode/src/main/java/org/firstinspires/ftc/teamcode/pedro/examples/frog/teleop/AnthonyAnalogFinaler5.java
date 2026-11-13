@@ -187,6 +187,9 @@ public class AnthonyAnalogFinaler5 extends OpMode {
         telemetry.addData("Actual RPM", shooter.getRPM());
         telemetry.addData("RPM Error",ShooterSubclass.targetRPM - shooter.getRPM());
         telemetry.addData("Servo Pos", servo.getHoldPosition());
+        telemetry.addData("x", follower.pose().x());
+        telemetry.addData("y", follower.pose().y());
+        telemetry.addData("heading", follower.pose().heading());
         telemetry.update();
     }
 }
