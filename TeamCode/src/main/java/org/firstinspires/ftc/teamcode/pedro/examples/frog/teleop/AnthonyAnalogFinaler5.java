@@ -97,21 +97,11 @@ public class AnthonyAnalogFinaler5 extends OpMode {
         }
 
         if (!weaverDriving) {
-            if (!gamepad1.a) {
-                follower.manual(
-                        Math.signum(-gamepad1.left_stick_y) * Math.pow(Math.abs(gamepad1.left_stick_y), 1.25),
-                        Math.signum(-gamepad1.left_stick_x) * Math.pow(Math.abs(gamepad1.left_stick_x), 1.25),
-                        Math.signum(-gamepad1.right_stick_x) * Math.pow(Math.abs(gamepad1.right_stick_x), 1.25)
+            follower.manual(
+                    Math.signum(-gamepad1.left_stick_y) * Math.pow(Math.abs(gamepad1.left_stick_y), 1.25),
+                     Math.signum(-gamepad1.left_stick_x) * Math.pow(Math.abs(gamepad1.left_stick_x), 1.25),
+                    Math.signum(-gamepad1.right_stick_x) * Math.pow(Math.abs(gamepad1.right_stick_x), 1.25)
                 );
-            }
-            else {
-                follower.manual(
-                        (-gamepad1.left_stick_y*0.2),
-                        (-gamepad1.left_stick_x*0.2),
-                        (-gamepad1.right_stick_x*0.2)
-                );
-            }
-
         }
 
         follower.update();

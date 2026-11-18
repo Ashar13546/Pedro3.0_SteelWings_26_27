@@ -13,7 +13,7 @@ public class ShooterSubclass {
     private DcMotorEx shooterMotor2;  // config name: "shooter2"
     private VoltageSensor battery;
 
-    public static double kF = 0.0001450; //0.000167
+    public static double kF = 0.0001805; //0.000167
     public static double kP = 0.0002; //0.00015, 0.001
     public static double kI = 0.0;
     public static double kD = 0.0;
