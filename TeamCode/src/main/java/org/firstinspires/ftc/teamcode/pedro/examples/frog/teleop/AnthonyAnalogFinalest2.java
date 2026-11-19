@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.pedro.examples.frog.teleop;
 
 import com.pedropathing.follower.Follower;
+import com.pedropathing.ivy.Scheduler;
 import com.pedropathing.math.Pose;
 import com.pedropathing.paths.Path;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
@@ -15,6 +16,7 @@ import org.firstinspires.ftc.teamcode.pedro.examples.frog.subclasses.TransferSub
 
 import static com.pedropathing.api.Paths.line;
 import static com.pedropathing.ivy.pedro.PedroCommands.follow;
+import static org.firstinspires.ftc.teamcode.pedro.examples.frog.subclasses.ShootSequence.rapidFire4;
 
 @TeleOp(name = "Firing Mech E Robot TeleOp 2 Saved Pos")
 public class AnthonyAnalogFinalest2 extends OpMode {
@@ -47,6 +49,7 @@ public class AnthonyAnalogFinalest2 extends OpMode {
 
     @Override
     public void init() {
+        Scheduler.reset();
         follower = Constants.create(hardwareMap);
 
         shooter = new ShooterSubclass();
@@ -60,6 +63,8 @@ public class AnthonyAnalogFinalest2 extends OpMode {
 
     @Override
     public void loop() {
+
+
         if (gamepad1.dpad_left && !lastDpadLeft) {
             savedPose = follower.pose();
         }
@@ -118,8 +123,8 @@ public class AnthonyAnalogFinalest2 extends OpMode {
 
         follower.update();
 
-        if (gamepad2.a) {
-            ShootSequence.rapidFire4(3150, shooter, transfer, servo);
+        if (gamepad2.a && !rapidFire4(3150, shooter, transfer, servo).isScheduled()) {
+            Scheduler.schedule(rapidFire4(3150, shooter, transfer, servo));
         }
 
         if (gamepad1.x) {
@@ -128,7 +133,7 @@ public class AnthonyAnalogFinalest2 extends OpMode {
             transfer.setTransferPower(gamepad1.left_trigger);
         } else if (gamepad1.left_bumper) {
             transfer.transferReverse();
-        } else {
+        } else if (!rapidFire4(3150, shooter, transfer, servo).isScheduled()){
             transfer.transferOff();
         }
         if (gamepad1.right_trigger > 0.05) {
@@ -137,7 +142,7 @@ public class AnthonyAnalogFinalest2 extends OpMode {
                 gamepad1.rumble(500);
                 hasRumbled = true;
             }
-        } else {
+        } else if (!rapidFire4(3150, shooter, transfer, servo).isScheduled()){
             shooter.shooterOff();
             hasRumbled = false;
         }
@@ -161,7 +166,7 @@ public class AnthonyAnalogFinalest2 extends OpMode {
 
         if (holdServoToggled) {
             servo.servoShoot();
-        } else {
+        } else if (!rapidFire4(3150, shooter, transfer, servo).isScheduled()) {
             servo.servoBlock();
         }
 
@@ -172,7 +177,7 @@ public class AnthonyAnalogFinalest2 extends OpMode {
 
         if (rampServoToggled) {
             servo.servoUp();
-        } else {
+        } else if (!rapidFire4(3150, shooter, transfer, servo).isScheduled()){
             servo.servoDown();
         }
 
@@ -184,6 +189,8 @@ public class AnthonyAnalogFinalest2 extends OpMode {
         }
         lastA = gamepad2.a;
         lastB = gamepad2.b;
+
+        Scheduler.execute();
 
         double shooterAmps = shooter.getAmps();
         telemetry.addData("Shooter Amps", shooterAmps);
