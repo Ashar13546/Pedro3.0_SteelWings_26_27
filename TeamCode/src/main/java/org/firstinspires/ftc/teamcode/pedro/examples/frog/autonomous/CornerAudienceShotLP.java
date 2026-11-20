@@ -35,13 +35,14 @@ public class CornerAudienceShotLP extends LinearOpMode {
     private final PoseFactory poseFactory = PoseFactory.degrees();
 
     private final Pose start = poseFactory.of(130, 10.5, 90);
-    private final Pose path1 = poseFactory.of(81.5452, 19.5471, 84.9179);
+    private final Pose path1 = poseFactory.of(81.5452, 19.5471, -95.0821);
     private final Pose path1Control1 = poseFactory.of(110.8538, 31.3498, 0);
-    private final Pose path1Segment1Start = poseFactory.of(81.5452, 19.5471, 180);
+    private final Pose path1Segment1Start = poseFactory.of(81.5452, 19.5471, 90);
     private final Pose path1Segment1End = poseFactory.of(81.5452, 19.5471, 180);
     private final Pose path1Segment2Target = poseFactory.of(84, 47.15, 0);
-    private final Pose point2Start = poseFactory.of(81.5452, 19.5471, 85);
+    private final Pose point2Start = poseFactory.of(81.5452, 19.5471, -95.0821);
     private final Pose point2 = poseFactory.of(125, 25, 180);
+
 
     // Autonomous routine
     public Command autoRoutine() {
@@ -91,7 +92,7 @@ public class CornerAudienceShotLP extends LinearOpMode {
     }
 
     public Path path1() {
-        return Paths.curve(start, path1Control1, path1).heading(Interpolator.piecewise().until(0.3, Interpolator.linear(path1Segment1Start, path1Segment1End)).until(1, Interpolator.facingPoint(path1Segment2Target)).reverse());
+        return Paths.curve(start, path1Control1, path1).heading(Interpolator.piecewise().until(0.3, Interpolator.linear(path1Segment1Start, path1Segment1End)).until(1, Interpolator.facingPoint(path1Segment2Target).reverse()));
     }//.
 
     public Path path2() {
