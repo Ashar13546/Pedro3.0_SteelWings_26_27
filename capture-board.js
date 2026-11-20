@@ -7,7 +7,7 @@ const { chromium } = require('playwright');
     colorScheme: 'dark'
   });
   
-  await page.goto('https://github.com'), { waitUntil: 'networkidle'};
+  await page.goto('https://github.com/users/Ashar13546/projects/1/views/2'), { waitUntil: 'networkidle'};
 
   await page.waitForTimeout(3000);
   await page.screenshot({ path: 'scrumboard.png'});
