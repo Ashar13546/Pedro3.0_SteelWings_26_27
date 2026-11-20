@@ -1,0 +1,31 @@
+name: Update Scrum Board in Discord
+
+on:
+  schedule:
+    - cron: '*/30 * * * *'
+  workflow_dispatch:
+
+jobs:
+  screenshot:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Playwright
+        run: |
+          npm init -y
+          npm install playwright
+          npx playwright install chromium
+
+      - name: Capture Board Screenshot
+        run: node capture-board.js
+
+      - name: Update Pinned Discord Message
+        run: |
+          curl -X PATCH "${{ secrets.DISCORD_WEBHOOK_URL }}/messages/${{ secrets.DISCORD_MESSAGE_ID }}" \
+            -F 'payload_json={"content": "Last updated: <t:'$(date +%s)':R>", "attachments": []}' \
+            -F "file=@scrumboard.png"
