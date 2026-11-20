@@ -2,7 +2,7 @@ name: Update Scrum Board in Discord
 
 on:
   schedule:
-    - cron: '29,59 * * * *'
+    - cron: '18,48 * * * *'
 
   workflow_dispatch:
 
