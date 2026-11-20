@@ -3,7 +3,7 @@ const { chromium } = require('playwright');
 (async () => {
   const browser = await chromium.launch();  // Or 'firefox' or 'webkit'.
   const page = await browser.newPage({
-    viewport: {width: 1920, height 1080 },
+    viewport: {width: 1920, height: 1080 },
     colorScheme: 'dark'
   });
   
