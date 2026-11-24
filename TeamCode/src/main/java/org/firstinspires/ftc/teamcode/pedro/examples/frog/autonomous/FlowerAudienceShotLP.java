@@ -15,39 +15,26 @@ import static com.pedropathing.ivy.groups.Groups.sequential;
 import static com.pedropathing.ivy.pedro.PedroCommands.follow;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.pedropathing.paths.interpolator.Interpolator;
 
 import org.firstinspires.ftc.teamcode.pedro.Constants;
-import org.firstinspires.ftc.teamcode.pedro.examples.frog.subclasses.ServoSubclass;
-import org.firstinspires.ftc.teamcode.pedro.examples.frog.subclasses.ShootSequence;
-import org.firstinspires.ftc.teamcode.pedro.examples.frog.subclasses.ShooterSubclass;
-import org.firstinspires.ftc.teamcode.pedro.examples.frog.subclasses.TransferSubclass;
 
-@Autonomous(name = "FlowerAudienceShotLP", group = "Autonomous")
+@Autonomous(name = "FASLP", group = "Autonomous")
 public class FlowerAudienceShotLP extends LinearOpMode {
-
-    private ShooterSubclass shooter = new ShooterSubclass();
-    private TransferSubclass transfer = new TransferSubclass();
-    private ServoSubclass servo = new ServoSubclass();
 
     private Follower follower;
 
     private final PoseFactory poseFactory = PoseFactory.degrees();
 
-    private final Pose start = poseFactory.of(80, 10.5, 90);
-    private final Pose path1 = poseFactory.of(81.5452, 19.5471, -95.0821);
-    private final Pose path1Segment1Start = poseFactory.of(81.5452, 19.5471, 270);
-    private final Pose path1Segment1End = poseFactory.of(81.5452, 19.5471, 270);
-    private final Pose path1Segment2Target = poseFactory.of(84, 47.15, 0);
-    private final Pose point2Start = poseFactory.of(81.5452, 19.5471, -95);
-    private final Pose point2 = poseFactory.of(125, 20, 180);
+    private final Pose start = poseFactory.of(80, 10.5, 270);
+    private final Pose path1 = poseFactory.of(81.55, 19.5471, 265);
+    private final Pose point2Start = poseFactory.of(81.55, 19.5471, 265);
+    private final Pose point2 = poseFactory.of(130, 20, 180);
+    private final Pose point2Control1 = poseFactory.of(97.57, 28.51, 0);
 
     // Autonomous routine
     public Command autoRoutine() {
         return sequential(
-                waitMs(15000),
                 follow(follower, path1()),
-                ShootSequence.rapidFire4(3150,shooter,transfer,servo),
                 follow(follower, path2())
         );
     }
@@ -56,15 +43,6 @@ public class FlowerAudienceShotLP extends LinearOpMode {
     public void runOpMode() {
         Scheduler.reset();
         follower = Constants.create(hardwareMap);
-
-        shooter = new ShooterSubclass();
-        transfer = new TransferSubclass();
-        servo = new ServoSubclass();
-
-        shooter.init(hardwareMap);
-        transfer.init(hardwareMap);
-        servo.init(hardwareMap);
-
         follower.setPose(start);
         follower.update();
 
@@ -73,7 +51,6 @@ public class FlowerAudienceShotLP extends LinearOpMode {
 
         while (opModeIsActive()) {
             follower.update();
-            shooter.update();
             Scheduler.execute();
 
             telemetry.addData("x", follower.pose().x());
@@ -90,10 +67,10 @@ public class FlowerAudienceShotLP extends LinearOpMode {
     }
 
     public Path path1() {
-        return Paths.line(start, path1).heading(Interpolator.piecewise().until(0.3, Interpolator.linear(path1Segment1Start, path1Segment1End)).until(1, Interpolator.facingPoint(path1Segment2Target).reverse()));
+        return Paths.line(start, path1).linear(start, path1);
     }
 
     public Path path2() {
-        return Paths.line(point2Start, point2).linear(point2Start, point2);
+        return Paths.curve(point2Start, point2Control1, point2).linear(point2Start, point2);
     }
 }
