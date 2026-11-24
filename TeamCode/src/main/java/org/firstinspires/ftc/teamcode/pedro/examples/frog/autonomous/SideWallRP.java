@@ -20,9 +20,8 @@ import org.firstinspires.ftc.teamcode.pedro.Constants;
 import org.firstinspires.ftc.teamcode.pedro.examples.frog.subclasses.ServoSubclass;
 import org.firstinspires.ftc.teamcode.pedro.examples.frog.subclasses.ShooterSubclass;
 import org.firstinspires.ftc.teamcode.pedro.examples.frog.subclasses.TransferSubclass;
-
-@Autonomous(name = "Back Wall Left Park", group = "Autonomous")
-public class BioBuzzAutoWShoot11 extends LinearOpMode {
+@Autonomous(name = "SWRP", group = "Autonomous")
+public class SideWallRP extends LinearOpMode {
     private ShooterSubclass shooter = new ShooterSubclass();
     private TransferSubclass transfer = new TransferSubclass();
     private ServoSubclass servo = new ServoSubclass();
@@ -31,12 +30,12 @@ public class BioBuzzAutoWShoot11 extends LinearOpMode {
     private final PoseFactory poseFactory = PoseFactory.degrees();
 
     private final Pose start = poseFactory.of(132, 118, 90);
-    private final Pose path1Start = poseFactory.of(94.33, 131, 270);
-    private final Pose path1 = poseFactory.of(83, 120, 275-180);
+    private final Pose path1Start = poseFactory.of(132, 118, 180);
+    private final Pose path1 = poseFactory.of(83, 120, 95);
     private final Pose point2 = poseFactory.of(125, 95, 0);
-    private final Pose point3 = poseFactory.of(83, 120, 275-180);
-    private final Pose point4 = poseFactory.of(125, 25, 180); //x 130
-    private final Pose point4Control1 = poseFactory.of(45, 15, 0);
+    private final Pose point3 = poseFactory.of(83, 120, 95);
+    private final Pose point4 = poseFactory.of(125, 45, 180); // 130
+    private final Pose point4Control1 = poseFactory.of(40, 6, 0);
 
 
 

@@ -112,26 +112,21 @@ public class AnthonyAnalogFinalest3 extends OpMode {
 
         boolean isShootingSequenceRunning = (activeShootCommand != null && activeShootCommand.isScheduled());
 
-        // Trigger sequence on Gamepad 2 X button (rising edge)
-        boolean shootButtonPressed = gamepad2.x;
-        if (shootButtonPressed && !lastShootButton && !isShootingSequenceRunning) {
-            // Optional: pass ShooterSubclass.targetRPM instead of hardcoding 3150
-            activeShootCommand = rapidFire4(3150, shooter, transfer, servo);
-            Scheduler.schedule(activeShootCommand);
-            isShootingSequenceRunning = true;
+        boolean shootButtonPressed = gamepad1.b;
+        if (shootButtonPressed && !lastShootButton) {
+            if (isShootingSequenceRunning) {
+                Scheduler.cancel(activeShootCommand);
+                isShootingSequenceRunning = false;
+            } else {
+                activeShootCommand = rapidFire4(ShooterSubclass.targetRPM, shooter, transfer, servo);
+                Scheduler.schedule(activeShootCommand);
+                isShootingSequenceRunning = true;
+            }
         }
         lastShootButton = shootButtonPressed;
 
-        // Emergency Cancel: Gamepad 2 Y button stops the sequence immediately
-        if (gamepad2.y && isShootingSequenceRunning) {
-            Scheduler.cancel(activeShootCommand);
-            isShootingSequenceRunning = false;
-        }
 
-        // --- MANUAL SUBSYSTEM CONTROLS ---
-        // Only allow manual overrides/off-states if the sequence is NOT running
         if (!isShootingSequenceRunning) {
-            // Transfer control
             if (gamepad1.x) {
                 transfer.transferShoot();
             } else if (gamepad1.left_trigger > 0.05) {
@@ -142,7 +137,6 @@ public class AnthonyAnalogFinalest3 extends OpMode {
                 transfer.transferOff();
             }
 
-            // Shooter control
             if (gamepad1.right_trigger > 0.05) {
                 shooter.shooterOn(ShooterSubclass.targetRPM);
                 if (shooter.isAtVelocity(ShooterSubclass.targetRPM) && !hasRumbled) {
@@ -154,7 +148,6 @@ public class AnthonyAnalogFinalest3 extends OpMode {
                 hasRumbled = false;
             }
 
-            // Hold Servo control
             if (gamepad1.right_bumper && !lastRB) {
                 holdServoToggled = !holdServoToggled;
             }
@@ -164,7 +157,6 @@ public class AnthonyAnalogFinalest3 extends OpMode {
                 servo.servoBlock();
             }
 
-            // Ramp Servo control
             if (gamepad1.y && !lastYButtonPressed) {
                 rampServoToggled = !rampServoToggled;
             }
@@ -175,14 +167,11 @@ public class AnthonyAnalogFinalest3 extends OpMode {
             }
         }
 
-        // Always update toggle tracking variables so they don't misfire when sequence ends
         lastRB = gamepad1.right_bumper;
         lastYButtonPressed = gamepad1.y;
 
-        // Always update shooter PID/velocity loop
         shooter.update();
 
-        // --- RPM PRESETS & ADJUSTMENTS ---
         if (gamepad2.start) {
             if (gamepad2.dpad_up && !lastDpadUp) ShooterSubclass.adjustTargetRPM(5);
             if (gamepad2.dpad_down && !lastDpadDown) ShooterSubclass.adjustTargetRPM(-5);
@@ -195,10 +184,8 @@ public class AnthonyAnalogFinalest3 extends OpMode {
         lastA = gamepad2.a;
         lastB = gamepad2.b;
 
-        // --- RUN SCHEDULER ---
         Scheduler.execute();
 
-        // --- TELEMETRY ---
         double shooterAmps = shooter.getAmps();
         telemetry.addData("Sequence Active", isShootingSequenceRunning);
         telemetry.addData("Shooter Amps", shooterAmps);

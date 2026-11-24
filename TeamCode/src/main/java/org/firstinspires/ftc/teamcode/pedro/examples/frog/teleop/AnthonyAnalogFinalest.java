@@ -14,7 +14,7 @@ import org.firstinspires.ftc.teamcode.pedro.examples.frog.subclasses.TransferSub
 
 import static com.pedropathing.api.Paths.line;
 
-@TeleOp(name = "E Robot TeleOp 2 Saved Pos")
+@TeleOp(name = "Robot TeleOp No Shoot Sequence")
 public class AnthonyAnalogFinalest extends OpMode {
 
     private Follower follower;

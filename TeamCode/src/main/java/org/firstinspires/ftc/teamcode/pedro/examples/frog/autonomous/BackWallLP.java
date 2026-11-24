@@ -21,8 +21,8 @@ import org.firstinspires.ftc.teamcode.pedro.examples.frog.subclasses.ServoSubcla
 import org.firstinspires.ftc.teamcode.pedro.examples.frog.subclasses.ShooterSubclass;
 import org.firstinspires.ftc.teamcode.pedro.examples.frog.subclasses.TransferSubclass;
 
-@Autonomous(name = "Side Wall Left Park", group = "Autonomous")
-public class BioBuzzAutoWShoot10 extends LinearOpMode {
+@Autonomous(name = "BWLP", group = "Autonomous")
+public class BackWallLP extends LinearOpMode {
     private ShooterSubclass shooter = new ShooterSubclass();
     private TransferSubclass transfer = new TransferSubclass();
     private ServoSubclass servo = new ServoSubclass();
@@ -31,11 +31,11 @@ public class BioBuzzAutoWShoot10 extends LinearOpMode {
     private final PoseFactory poseFactory = PoseFactory.degrees();
 
     private final Pose start = poseFactory.of(132, 118, 90);
-    private final Pose path1Start = poseFactory.of(132, 118, 180);
+    private final Pose path1Start = poseFactory.of(94.33, 131, 270);
     private final Pose path1 = poseFactory.of(83, 120, 275-180);
     private final Pose point2 = poseFactory.of(125, 95, 0);
     private final Pose point3 = poseFactory.of(83, 120, 275-180);
-    private final Pose point4 = poseFactory.of(125, 25, 180); // x 130
+    private final Pose point4 = poseFactory.of(125, 25, 180); //x 130
     private final Pose point4Control1 = poseFactory.of(45, 15, 0);
 
 
@@ -70,7 +70,7 @@ public class BioBuzzAutoWShoot10 extends LinearOpMode {
                 // 4. drive to flower & intake more pollen for 1.5s then stop
                 parallel(
                         follow(follower, intakePollenPos()),
-                        sequential(//f
+                        sequential(
                                 instant(() -> {
                                     transfer.transferOn();
                                 }),

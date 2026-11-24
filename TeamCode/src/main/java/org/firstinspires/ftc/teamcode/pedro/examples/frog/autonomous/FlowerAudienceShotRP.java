@@ -11,15 +11,23 @@ import com.pedropathing.ivy.Command;
 import com.pedropathing.ivy.Scheduler;
 import static com.pedropathing.ivy.Scheduler.schedule;
 import static com.pedropathing.ivy.commands.Commands.*;
+import static com.pedropathing.ivy.groups.Groups.race;
 import static com.pedropathing.ivy.groups.Groups.sequential;
 import static com.pedropathing.ivy.pedro.PedroCommands.follow;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.pedro.Constants;
+import org.firstinspires.ftc.teamcode.pedro.examples.frog.subclasses.ServoSubclass;
+import org.firstinspires.ftc.teamcode.pedro.examples.frog.subclasses.ShootSequence;
+import org.firstinspires.ftc.teamcode.pedro.examples.frog.subclasses.ShooterSubclass;
+import org.firstinspires.ftc.teamcode.pedro.examples.frog.subclasses.TransferSubclass;
 
 @Autonomous(name = "FASRP", group = "Autonomous")
 public class FlowerAudienceShotRP extends LinearOpMode {
+    private ShooterSubclass shooter = new ShooterSubclass();
+    private TransferSubclass transfer = new TransferSubclass();
+    private ServoSubclass servo = new ServoSubclass();
 
     private Follower follower;
 
@@ -35,15 +43,35 @@ public class FlowerAudienceShotRP extends LinearOpMode {
     // Autonomous routine
     public Command autoRoutine() {
         return sequential(
+                waitMs(15000),
                 follow(follower, path1()),
+                race(
+                        ShootSequence.rapidFire4(3300, shooter, transfer, servo),
+                        waitMs(10000)
+                ),
+                instant(() -> {
+                    shooter.shooterOff();
+                    transfer.transferOff();
+                    servo.servoBlock();
+                }),
                 follow(follower, path2())
         );
     }
+
 
     @Override
     public void runOpMode() {
         Scheduler.reset();
         follower = Constants.create(hardwareMap);
+
+        shooter = new ShooterSubclass();
+        transfer = new TransferSubclass();
+        servo = new ServoSubclass();
+
+        shooter.init(hardwareMap);
+        transfer.init(hardwareMap);
+        servo.init(hardwareMap);
+
         follower.setPose(start);
         follower.update();
 
@@ -52,6 +80,7 @@ public class FlowerAudienceShotRP extends LinearOpMode {
 
         while (opModeIsActive()) {
             follower.update();
+            shooter.update();
             Scheduler.execute();
 
             telemetry.addData("x", follower.pose().x());

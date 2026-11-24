@@ -21,8 +21,8 @@ import org.firstinspires.ftc.teamcode.pedro.examples.frog.subclasses.ServoSubcla
 import org.firstinspires.ftc.teamcode.pedro.examples.frog.subclasses.ShooterSubclass;
 import org.firstinspires.ftc.teamcode.pedro.examples.frog.subclasses.TransferSubclass;
 
-@Autonomous(name = "Back Wall Right Park", group = "Autonomous")
-public class BioBuzzAutoWShoot12 extends LinearOpMode {
+@Autonomous(name = "BWRP", group = "Autonomous")
+public class BackWallRP extends LinearOpMode {
     private ShooterSubclass shooter = new ShooterSubclass();
     private TransferSubclass transfer = new TransferSubclass();
     private ServoSubclass servo = new ServoSubclass();
